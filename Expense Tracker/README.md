@@ -1,0 +1,1 @@
+SmartSpend is a modern and user-friendly expense tracking web application designed to help users manage their finances in a simple way. It allows users to create an account, track income and expenses, organize transactions by category, manage budgets, and monitor spending records. Built with a clean UI and responsive design for a smooth user experience.
