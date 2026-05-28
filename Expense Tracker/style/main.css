@@ -11,7 +11,7 @@ body{
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding-top: 65px;
-    padding-left: 240px;
+    padding-left: 270px;
     height: 200vh;
 }
 
@@ -32,7 +32,7 @@ header{
 nav{
     display: flex;
     justify-content: space-between;
-    width: 97%;
+    width: 98%;
     height: 60px;
 }
 
@@ -89,12 +89,12 @@ nav{
         color: white;
         background-color: #5B21B6;
         border-radius: 50%;
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
         cursor: pointer;
-        h3{
+        h4{
             font-family: 'Poppins';
-            font-weight: 600;
+            font-weight: 500;
         }
     }
     .toggle-notif{
@@ -124,9 +124,75 @@ nav{
     left: 0;
     bottom: 0;
     z-index: 1000;
-    width: 230px;
+    width: 260px;
+    padding: 1em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-right: 1px solid rgb(203, 203, 203);
     background-color: #ffffff;
+    cursor: pointer;
+    .sidebar-list{
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+        .sidebar-links{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            column-gap: 13px;
+            border-radius: 12px;
+            height: 50px;
+            img{
+                margin-left: 1.2em;
+                width: 30px;
+            }
+            h4{
+                color: #4d4d4d;
+                font-size: 14px;
+                transition: color 0.2s ease;
+            }
+            .list{
+                margin-left: 1.35em;
+                width: 25px;
+            }
+            .plus{
+                margin-left: 1.35em;
+                width: 25px;
+            }
+        }
+    }
+
+    .sidebar-log-out{
+        margin-bottom: 1em;
+        cursor: pointer;
+        .sidebar-links{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            column-gap: 13px;
+            border-radius: 12px;
+            height: 50px;
+            img{
+                margin-left: 1.3em;
+                width: 25px;
+            }
+            h4{
+                color: rgb(77, 77, 77);
+                font-size: 14px;
+                transition: color 0.2s ease;
+            }
+        }
+    }
+}
+
+.hover-icon{
+    display: none;
+}
+
+.sidebar-links:hover{
+    background-color: #864de119;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 section{
