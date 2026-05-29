@@ -10,16 +10,18 @@
     <header>
         <nav>
             <div class="logo-container">
-                <div class="logo">
+                <div class="logo" id="logo-container">
                     <a href="userDashboard.html" target="_self" title="SmartSpend Home"><img src="svg/wallet-logo.svg" alt="SmartSpend Logo"></a>
                 </div>
-                <div class="logo-text">
+                <div class="logo-text" id="logo-text">
                     <h3>SmartSpend</h3>
                 </div>
-                <div class="toggle">
+                <div class="toggle" id="toggle-container">
                     <button class="toggle-bar" id="toggle-bar"><img src="svg/bars.svg" alt="Toggle bar"></button>
+                    <button class="toggle-bar x" id="toggle-x"><img src="svg/x.svg" alt="X bar"></button>
                 </div>
             </div>
+            
             <div class="user-container">
                 <div class="toggle-notif">
                     <button class="toggle-bar" id="toggle-notif"><img src="svg/notif-bell.svg" alt="Toggle notification"></button>
@@ -37,37 +39,49 @@
     <aside class="side-bar">
         <div class="sidebar-list">
             <div class="sidebar-links">
-                <img src="svg/home.svg" alt="Home icon" class="icon home normal-icon">
-                <img src="svg/home-hover.svg" alt="Home icon" class="icon hover-icon">
-                <h4 class="h4-hover">Dashboard</h4>
+                <div class="icon-container">
+                    <img src="svg/home.svg" alt="Home icon" class="icon home normal-icon">
+                    <img src="svg/home-hover.svg" alt="Home icon" class="icon hover-icon">
+                </div>
+                <h4 class="h4-hover collapse">Dashboard</h4>
             </div>
             <div class="sidebar-links">
-                <img src="svg/list.svg" alt="List icon" class="icon list normal-icon">
-                <img src="svg/list-hover.svg" alt="List icon" class="icon list hover-icon">
-                <h4 class="h4-hover">Transaction</h4>
+                <div class="icon-container">
+                    <img src="svg/list.svg" alt="List icon" class="icon list normal-icon">
+                    <img src="svg/list-hover.svg" alt="List icon" class="icon list hover-icon">
+                </div>
+                <h4 class="h4-hover collapse">Transaction</h4>
             </div>
             <div class="sidebar-links">
-                <img src="svg/plus.svg" alt="Plus icon" class="icon plus normal-icon">
-                <img src="svg/plus-hover.svg" alt="Plus icon" class="icon plus hover-icon">
-                <h4 class="h4-hover">Add Transacrtion</h4>
+                <div class="icon-container">
+                    <img src="svg/plus.svg" alt="Plus icon" class="icon plus normal-icon">
+                    <img src="svg/plus-hover.svg" alt="Plus icon" class="icon plus hover-icon">
+                </div>
+                <h4 class="h4-hover collapse">Add Transaction</h4>
             </div>
             <div class="sidebar-links">
-                <img src="svg/tags.svg" alt="Tags icon" class="icon tags normal-icon">
-                <img src="svg/tags-hover.svg" alt="Tags icon" class="icon tags hover-icon">
-                <h4 class="h4-hover">Caregories</h4>
+                <div class="icon-container">
+                    <img src="svg/tags.svg" alt="Tags icon" class="icon tags normal-icon">
+                    <img src="svg/tags-hover.svg" alt="Tags icon" class="icon tags hover-icon">
+                </div>
+                <h4 class="h4-hover collapse">Categories</h4>
             </div>
             <div class="sidebar-links">
-                <img src="svg/wallet-green.svg" alt="Wallet icon" class="icon income normal-icon">
-                <img src="svg/wallet-logo.svg" alt="Wallet icon" class="icon hover-icon">
-                <h4 class="h4-hover">Income</h4>
+                <div class="icon-container">
+                    <img src="svg/wallet-logo.svg" alt="Wallet icon" class="icon hover-icon">
+                    <img src="svg/wallet-green.svg" alt="Wallet icon" class="icon income normal-icon">
+                </div>
+                <h4 class="h4-hover collapse">Income</h4>
             </div>
         </div>
 
         <div class="sidebar-log-out">
             <div class="sidebar-links">
-                <img src="svg/logout.svg" alt="Logout icon" class="logout icon normal-icon">
-                <img src="svg/logout-hover.svg" alt="logout icon" class="icon hover-icon">
-                <h4 class="h4-hover">Logout</h4>
+                <div class="icon-container">
+                    <img src="svg/logout.svg" alt="Logout icon" class="logout icon normal-icon">
+                    <img src="svg/logout-hover.svg" alt="logout icon" class="icon hover-icon">
+                </div>
+                <h4 class="h4-hover collapse">Logout</h4>
             </div>
         </div>
     </aside>
