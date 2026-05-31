@@ -1,5 +1,4 @@
 const logOutContainer = document.querySelector('.sidebar-log-out');
-const mouseHover = document.querySelectorAll('.sidebar-links');
 const toggleBar = document.getElementById('toggle-bar');
 const toggleContainer = document.getElementById('toggle-container');
 const toggleBarX = document.getElementById('toggle-x');
@@ -13,27 +12,6 @@ const body = document.getElementById('body');
 logOutContainer.addEventListener('click', () =>{
     window.location.href = 'login.html';
 });
-
-// sidebar hover
-mouseHover.forEach(link => {
-    const h4 = link.querySelector('.h4-hover');
-    const normalIcon = link.querySelector('.normal-icon');
-    const hoverIcon = link.querySelector('.hover-icon');
-    // Isang safety check na lang para sa lahat ng elements
-    if (!h4 || !normalIcon || !hoverIcon) return; 
-
-    // Isang function na lang na kayang mag-handle ng parehong Enter at Leave
-    const toggleHoverState = (isHovered) => {
-        h4.style.color = isHovered ? '#5B21B6' : '#4d4d4d';
-        normalIcon.style.display = isHovered ? 'none' : 'inline';
-        hoverIcon.style.display = isHovered ? 'inline' : 'none';
-    };
-
-    link.addEventListener('mouseenter', () => toggleHoverState(true));
-    link.addEventListener('mouseleave', () => toggleHoverState(false));
-});
-
-
 
 const saveSidebarState = localStorage.getItem('sidebarState');
 saveSidebarState === 'collapsed' ? collapseSidebar() : expandSidebar();
@@ -76,7 +54,6 @@ function expandSidebar(){
     toggleContainer?.style.setProperty('margin-left', '2em');
     body?.style.setProperty('margin-left', '260px');
     logoText?.style.setProperty('display', 'flex');
-
 
     if(logoIconContainer){ 
         logoIconContainer.style.borderRight = 'none';

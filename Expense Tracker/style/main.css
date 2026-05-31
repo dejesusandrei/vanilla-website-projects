@@ -240,7 +240,7 @@ section{
     .expenses-section{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        column-gap: 1em;
+        column-gap: 2em;
 
 
         .expenses{
@@ -340,8 +340,20 @@ section{
                 color: #4d4d4d;
             }
 
-
-
         }
     }
+}
+
+/* 1. Hover para sa TEXT - Gagana lang kung WALANG .active class ang link */
+.sidebar-links:not(.active):hover .h4-hover {
+    color: #5B21B6 !important;
+}
+
+/* 2. Hover para sa IMAGES/ICONS - Gagana lang kung WALANG .active class ang link */
+.sidebar-links:not(.active):hover .normal-icon {
+    display: none !important;
+}
+
+.sidebar-links:not(.active):hover .hover-icon {
+    display: inline !important;
 }
