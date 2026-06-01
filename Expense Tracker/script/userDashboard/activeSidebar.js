@@ -28,18 +28,21 @@ document.addEventListener('DOMContentLoaded', () =>{
             toggleHoverState(true);
         });
         link.addEventListener('mouseleave', () => {
-            // PROTEKSYON: Kung ito ang active page, HUWAG ibalik sa gray ang kulay
             if (link.classList.contains('active')) return;
             toggleHoverState(false);
         });
 
         // active link
         link.addEventListener('click', () =>{
-            const pageName = h4.textContent.trim().toLowerCase();
+            // get the value of data-set
+            const pageName = link.getAttribute('data-target');
 
-            if (pageName !== 'logout') {
+            if(pageName &&  pageName !== 'logout') {
                 localStorage.setItem('activePage', pageName);
                 renderSetActivePageUI(pageName);
+            }else if(pageName === 'logout'){
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = 'login.html';
             }
         });
     });
@@ -47,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 function renderSetActivePageUI(pageName){
     const sidebarLinks = document.querySelectorAll('.sidebar-links');
+    const allSections = document.querySelectorAll('.sections');
 
+    // controls for sidebar
     sidebarLinks.forEach(link => {
         const h4 = link.querySelector('.h4-hover');
         const normalIcon = link.querySelector('.normal-icon');
@@ -62,13 +67,26 @@ function renderSetActivePageUI(pageName){
             link.style.backgroundColor = isActive ? '#864de119' : 'transparent';
         };
 
-        const currentLinkText = h4.textContent.trim().toLowerCase();
-        if(currentLinkText === pageName){
+        // naka save lahat ng mga data-target sa target page
+        // so basically naka loop sya then check sa if condition
+        // kung ang target page is equal sa pageName 
+        // dash === add-tra = false, transan === add-tra = false
+        const targetPage = link.getAttribute('data-target');
+        if(targetPage === pageName){
             toggleActiveState(true);
             link.classList.add('active');
         }else{
             toggleActiveState(false);
             link.classList.remove('active');
+        }
+    });
+
+    // control for sections
+    allSections.forEach(section =>{
+        if (section.id === pageName) {
+            section.classList.add('active-section'); // show the section
+        } else {
+            section.classList.remove('active-section'); // hide the section 
         }
     });
 }

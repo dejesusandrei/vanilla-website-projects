@@ -357,3 +357,28 @@ section{
 .sidebar-links:not(.active):hover .hover-icon {
     display: inline !important;
 }
+
+/* hide all sections */
+.sections {
+    display: none;
+}
+
+/* Show specific section 
+    need mag kadikit no spaces sa mga classes
+*/
+.sections.active-section {
+    display: block; 
+    animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

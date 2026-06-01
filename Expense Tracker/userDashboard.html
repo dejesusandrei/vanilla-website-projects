@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body id="body">
+    <!-- Header -->
     <header>
         <nav>
             <div class="logo-container">
@@ -36,30 +37,38 @@
         </nav>
     </header>
 
+    <!-- Sidebar -->
     <aside class="side-bar">
         <div class="sidebar-list">
-            <div class="sidebar-links">
+            <!-- Dashboard -->
+            <div class="sidebar-links" data-target="dashboard">
                 <div class="icon-container">
                     <img src="svg/home.svg" alt="Home icon" class="icon home normal-icon">
                     <img src="svg/home-hover.svg" alt="Home icon" class="icon hover-icon">
                 </div>
                 <h4 class="h4-hover collapse">Dashboard</h4>
             </div>
-            <div class="sidebar-links">
+
+            <!-- Transactions -->
+            <div class="sidebar-links" data-target="transaction">
                 <div class="icon-container">
                     <img src="svg/list.svg" alt="List icon" class="icon list normal-icon">
                     <img src="svg/list-hover.svg" alt="List icon" class="icon list hover-icon">
                 </div>
                 <h4 class="h4-hover collapse">Transaction</h4>
             </div>
-            <div class="sidebar-links">
+
+            <!-- Add Transactions -->
+            <div class="sidebar-links" data-target="add-transaction">
                 <div class="icon-container">
                     <img src="svg/plus.svg" alt="Plus icon" class="icon plus normal-icon">
                     <img src="svg/plus-hover.svg" alt="Plus icon" class="icon plus hover-icon">
                 </div>
                 <h4 class="h4-hover collapse">Add Transaction</h4>
             </div>
-            <div class="sidebar-links">
+
+            <!-- Categories -->
+            <div class="sidebar-links" data-target="categories">
                 <div class="icon-container">
                     <img src="svg/tags.svg" alt="Tags icon" class="icon tags normal-icon">
                     <img src="svg/tags-hover.svg" alt="Tags icon" class="icon tags hover-icon">
@@ -69,7 +78,7 @@
         </div>
 
         <div class="sidebar-log-out">
-            <div class="sidebar-links">
+            <div class="sidebar-links" data-target="logout">
                 <div class="icon-container">
                     <img src="svg/logout.svg" alt="Logout icon" class="logout icon normal-icon">
                     <img src="svg/logout-hover.svg" alt="logout icon" class="icon hover-icon">
@@ -79,6 +88,7 @@
         </div>
     </aside>
 
+    <!-- Main -->
     <main>
         <section class="dashboard-section sections" id="dashboard">
             <div class="title-section">
@@ -89,7 +99,6 @@
                     <p>Overview of your finances</p>
                 </div>
             </div>
-
             <!-- Total income -->
             <div class="expenses-section">
                 <div class="income-container expenses">
@@ -176,6 +185,16 @@
                 </div>
             </div>
 
+        </section>
+
+        <section class="transaction-section sections" id="transaction">
+            transac
+        </section>
+        <section class="add-transaction-section sections" id="add-transaction">
+            add transac
+        </section>
+        <section class="categories-section sections" id="categories">
+            categories
         </section>
     </main>
 
