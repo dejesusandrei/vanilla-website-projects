@@ -9,31 +9,31 @@
 <body id="body">
     <!-- Header -->
     <header>
-        <nav>
-            <div class="logo-container">
-                <div class="logo" id="logo-container">
-                    <a href="userDashboard.html" target="_self" title="SmartSpend Home"><img src="svg/wallet-logo.svg" alt="SmartSpend Logo"></a>
+            <nav>
+                <div class="logo-container">
+                    <div class="logo" id="logo-container">
+                        <a href="userDashboard.html" target="_self" title="SmartSpend Home"><img src="svg/wallet-logo.svg" alt="SmartSpend Logo"></a>
+                    </div>
+                    <div class="logo-text" id="logo-text">
+                        <h3>SmartSpend</h3>
+                    </div>
+                    <div class="toggle" id="toggle-container">
+                        <button class="toggle-bar" id="toggle-bar"><img src="svg/bars.svg" alt="Toggle bar"></button>
+                        <button class="toggle-bar x" id="toggle-x"><img src="svg/x.svg" alt="X bar"></button>
+                    </div>
                 </div>
-                <div class="logo-text" id="logo-text">
-                    <h3>SmartSpend</h3>
+                
+                <div class="user-container">
+                    <div class="toggle-notif">
+                        <button class="toggle-bar" id="toggle-notif"><img src="svg/notif-bell.svg" alt="Toggle notification"></button>
+                    </div>
+                    <div class="user-logo">
+                        <h4 id="user-logo-text"></h4>
+                    </div>
+                    <div class="user-name">
+                        <p id="user-name"></p>
+                    </div>
                 </div>
-                <div class="toggle" id="toggle-container">
-                    <button class="toggle-bar" id="toggle-bar"><img src="svg/bars.svg" alt="Toggle bar"></button>
-                    <button class="toggle-bar x" id="toggle-x"><img src="svg/x.svg" alt="X bar"></button>
-                </div>
-            </div>
-            
-            <div class="user-container">
-                <div class="toggle-notif">
-                    <button class="toggle-bar" id="toggle-notif"><img src="svg/notif-bell.svg" alt="Toggle notification"></button>
-                </div>
-                <div class="user-logo">
-                    <h4 id="user-logo-text"></h4>
-                </div>
-                <div class="user-name">
-                    <p id="user-name"></p>
-                </div>
-            </div>
         </nav>
     </header>
 
@@ -48,7 +48,7 @@
                 </div>
                 <h4 class="h4-hover collapse">Dashboard</h4>
             </div>
-
+            
             <!-- Transactions -->
             <div class="sidebar-links" data-target="transaction">
                 <div class="icon-container">
@@ -57,7 +57,7 @@
                 </div>
                 <h4 class="h4-hover collapse">Transaction</h4>
             </div>
-
+            
             <!-- Add Transactions -->
             <div class="sidebar-links" data-target="add-transaction">
                 <div class="icon-container">
@@ -66,7 +66,7 @@
                 </div>
                 <h4 class="h4-hover collapse">Add Transaction</h4>
             </div>
-
+            
             <!-- Categories -->
             <div class="sidebar-links" data-target="categories">
                 <div class="icon-container">
@@ -76,7 +76,7 @@
                 <h4 class="h4-hover collapse">Categories</h4>
             </div>
         </div>
-
+        
         <div class="sidebar-log-out">
             <div class="sidebar-links" data-target="logout">
                 <div class="icon-container">
@@ -106,7 +106,7 @@
                     <div class="wallet-logo green">
                         <img src="svg/wallet-green.svg" alt="Wallet icon">
                     </div>
-
+                    
                     <div class="income-content total-expenses">
                         <div class="income-text">
                             <p>Total Income</p>
@@ -126,15 +126,15 @@
                             <p>vs last month</p>
                         </div>
                     </div>
-
+                    
                 </div>
-
+                
                 <!-- Total Expenses -->
                 <div class="expenses-container expenses">
                     <div class="wallet-logo red">
                         <img src="svg/wallet-red.svg" alt="Wallet icon">
                     </div>
-
+                    
                     <div class="income-content total-expenses">
                         <div class="income-text">
                             <p>Total Expenses</p>
@@ -184,9 +184,9 @@
                     </div>
                 </div>
             </div>
-
+            
         </section>
-
+        
         <!-- Transactoion -->
         <section class="transaction-section sections" id="transaction">
             transac
@@ -196,7 +196,7 @@
         <section class="add-transaction-section sections" id="add-transaction">
             add transac
         </section>
-
+        
         <!-- Categories -->
         <section class="categories-section sections" id="categories">
             <div class="categories-header-section">
@@ -204,7 +204,7 @@
                     <h1>Categories</h1>
                     <p>Manage your categories</p>
                 </div>
-
+                
                 <div class="categories-add-btn">
                     <!-- Add category btn -->
                     <div class="add-category-btn">
@@ -215,7 +215,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Categories table -->
             <table class="table">
                 <thead>
@@ -263,7 +263,7 @@
                     </tr>
                 </tbody>
             </table>
-
+            
             <!-- If no categories yet -->
             <div class="empty-category">
                 <div class="tags-icon">
@@ -271,16 +271,25 @@
                 </div>
                 <h2>No categories yet</h2>
                 <p>Categories help you organize your income and expenses. Add your first category to get started.</p>
-                <div class="empty-add-category-btn">
+                <div class="empty-add-category-btn" id="empty-state-add-category">
                     <div class="add-icon-categories">
                         <img src="svg/plus-categ.svg" alt="Plus icon">
                     </div>
                     <p>Add Category</p>
                 </div>
             </div>
-
+            
         </section>
     </main>
+    
+    <div class="add-category-modal" id="add-category-modal">
+        <div class="add-category-header">
+            <h3>Add Category</h3>
+            <div class="back-btn-container" id="close-add-categ-modal">
+                <img src="svg/x.svg" alt="X button">
+            </div>
+        </div>
+    </div>
 
     <script src="script/userDashbaord.js" type="module"></script>
 </body>

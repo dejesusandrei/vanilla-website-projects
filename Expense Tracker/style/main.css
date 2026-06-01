@@ -7,6 +7,7 @@
 }
 
 body{
+    position: relative;
     background-color: #ececec5a;
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -536,8 +537,52 @@ main{
         }
     }
 
-
 }
+
+.add-category-modal{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60vh;
+    width: 40%;
+    max-width: 450px;
+    z-index: 1000;
+    padding: 1em;
+    background: white;
+    border: 1px solid #4d4d4d44;
+    border-radius: 13px;
+
+    .add-category-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2{
+            font-family: 'Poppins';
+            font-weight: 500;
+        }
+
+        .back-btn-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            img{
+                width: 20px;
+            }
+        }
+    }
+}
+
+.blur{
+    border: 2px solid black;
+}
+
 
 /* 1. Hover para sa TEXT - Gagana lang kung WALANG .active class ang link */
 .sidebar-links:not(.active):hover .h4-hover {
@@ -566,6 +611,15 @@ main{
     animation: fadeIn 0.4s ease-in-out forwards;
 }
 
+.show-open-category-modal{
+    display: flex;
+}
+
+.blur-effect {
+    filter: blur(4px);
+    pointer-events: none;
+    transition: filter 0.3s ease;
+}
 
 @keyframes fadeIn {
     from {
