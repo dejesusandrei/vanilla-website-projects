@@ -222,7 +222,6 @@
                     <tr>
                         <th>Category Name</th>
                         <th>Type</th>
-                        <th>Color</th>
                         <th class="action-text">Action</th>
                     </tr>
                 </thead>
@@ -230,12 +229,6 @@
                     <tr>
                         <td>Food</td>
                         <td>Expense</td>
-                        <td class="color-text-body">
-                            <div class="color-container">
-                                <div class="color-box">.</div>
-                                <div class="color-text">#5B21B6</div>
-                            </div>
-                        </td>
                         <td class="action-text-body">
                             <div class="action-container">
                                 <div class="action-btn">
@@ -247,12 +240,6 @@
                     <tr>
                         <td>Food</td>
                         <td>Expense</td>
-                        <td class="color-text-body">
-                            <div class="color-container">
-                                <div class="color-box">.</div>
-                                <div class="color-text">#5B21B6</div>
-                            </div>
-                        </td>
                         <td class="action-text-body">
                             <div class="action-container">
                                 <div class="action-btn">
@@ -289,6 +276,30 @@
                 <img src="svg/x.svg" alt="X button">
             </div>
         </div>
+
+        <form class="category-form" id="add-category-from">
+            <div class="info-container">
+                <h4>Category name</h4>
+                <div class="form-group-name">
+                    <input class="category-text" type="text" id="categoryName" placeholder="e.g. Food, Transport" required>
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Type</h4>
+                <div class="form-group-name">
+                    <select name="category-type" class="custom-select" id="type-category" title="Category type">
+                        <option value="" disabled selected hidden>Select category type</option>
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-btn-container">
+                <button class="cancel-category js-cancel-category">Cancel</button>
+                <button class="save-category js-save-category">Save Category</button>
+            </div>
+
+        </form>
     </div>
 
     <script src="script/userDashbaord.js" type="module"></script>

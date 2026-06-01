@@ -1,5 +1,8 @@
 const emptyStateAddCategoryBtn = document.getElementById('empty-state-add-category');
 const closeAddCategModal= document.getElementById('close-add-categ-modal');
+const cancelModal = document.querySelector('.js-cancel-category');
+
+
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
 const main = document.querySelector('main');
@@ -15,9 +18,12 @@ const addCategToggleModal = () => {
 
 emptyStateAddCategoryBtn.addEventListener('click', () =>{
     addCategToggleModal();
-    console.log('hi');
 });
 
 closeAddCategModal.addEventListener('click', () =>{
+    addCategToggleModal();
+});
+
+cancelModal.addEventListener('click', () =>{
     addCategToggleModal();
 });
