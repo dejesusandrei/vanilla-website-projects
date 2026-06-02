@@ -4,6 +4,7 @@ const emptyStateAddCategoryBtn = document.getElementById('empty-state-add-catego
 const closeAddCategModal= document.getElementById('close-add-categ-modal');
 const cancelModal = document.querySelector('.js-cancel-category');
 const saveBtn = document.getElementById('save-category');
+const addCategoryBtn = document.querySelector('.add-category-btn');
 
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
@@ -30,7 +31,11 @@ saveBtn.addEventListener('click', (e) => {
         return;
     }
 
-    userCategories.addCategory(categoryName, categoryType);
+    userCategories.addCategory(categoryName, categoryType, e);
+    addCategToggleModal();
+});
+
+addCategoryBtn.addEventListener('click', (e) => {
     addCategToggleModal();
 });
 
@@ -54,3 +59,6 @@ closeAddCategModal.addEventListener('click', () =>{
 cancelModal.addEventListener('click', () =>{
     addCategToggleModal();
 });
+
+userCategories.renderCategory();
+userCategories.isCategoryEmpty();
