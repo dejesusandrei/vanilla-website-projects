@@ -408,7 +408,6 @@ main{
         border-collapse: collapse;
         border-spacing: 0;
         border-radius: 8px;
-        overflow: hidden;
         
         thead{
             background-color: #d5d5d558;
@@ -436,26 +435,41 @@ main{
             text-align: center;
         }
         
-        .action-text-body{
-            .action-container{
+        .action-btn-body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .action-btn{
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                column-gap: 1em;
+                height: 35px;
                 
-                .action-btn{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 35px;
-                    height: 28px;
-                    border-radius: 10px;
-                    font-weight: bolder;
+                button{
+                    border: none;
+                    border-radius: 8px;
                     cursor: pointer;
-                    box-shadow: 1px 2px 5px #4d4d4d6c;
+                    width: 35px;
+                    height: 35px;
+                    img{
+                        width: 20px;
+                    }
+                }
+
+                .edit-btn{
+                    background-color: rgba(67, 67, 250, 0.123);
+                }
+                .delete-btn{
+                    background-color: rgba(255, 0, 0, 0.123);
+                    img{
+                        width: 21px;
+                    }
                 }
             }
         }
     }
+    
 
     .empty-category{
         display: flex;
@@ -663,6 +677,9 @@ select:focus {
     border: 2px solid black;
 }
 
+.show-dropdown{
+    display: flex !important;
+}
 
 /* 1. Hover para sa TEXT - Gagana lang kung WALANG .active class ang link */
 .sidebar-links:not(.active):hover .h4-hover {

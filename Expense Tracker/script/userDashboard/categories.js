@@ -39,7 +39,8 @@ addCategoryBtn.addEventListener('click', (e) => {
     addCategToggleModal();
 });
 
-console.log(userCategories.category);
+
+
 
 const addCategToggleModal = () => {
     modal.classList.toggle('show-open-category-modal');

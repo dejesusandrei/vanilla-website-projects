@@ -65,14 +65,19 @@ export class Category{
             if(!categoryName && !type) return;
             categoryItemsHTML +=
             `
-            <tr class="row-${id}" data-book-id="${id}">
+            <tr class="row-${id}" data-category-id="${id}">
                 <td>${categoryName}</td>
                 <td>${type}</td>
-                <td class="action-text-body">
-                    <div class="action-container">
-                        <div class="action-btn">
-                            ...
-                        </div>
+                <td class="action-btn-body">
+                    <div class="action-btn">
+                        <button class="edit-btn js-edit-btn"
+                        data-book-id="${id}">
+                            <img src="svg/edit.svg" alt="Edit Icon">
+                        </button>
+                        <button class="delete-btn js-delete-btn"
+                        data-book-id="${id}">
+                            <img src="svg/delete.svg" alt="Delete Icon">
+                        </button>
                     </div>
                 </td>
             </tr>
