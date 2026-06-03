@@ -38,6 +38,7 @@ export class Category{
         
         if(findDuplicateCategory){
             alert('Error this category already exist');
+            event.target.closest('.category-form').reset();
             return;
         }
 
@@ -56,6 +57,19 @@ export class Category{
         event.target.closest('.category-form').reset();
     }
 
+    deleteCategory(categoryId){
+        let newArr = [];
+        this.category.forEach(categoryItem =>{
+            if(categoryItem.id !== Number(categoryId)){
+                newArr.push(categoryItem);
+            }
+        });
+        this.category = newArr;
+        this.saveToStorage();
+        this.isCategoryEmpty();
+        this.renderCategory();
+    }
+
     renderCategory(){
         let categoryItemsHTML = '';
         const categoryTableBody = document.querySelector('.category-items');
@@ -71,11 +85,11 @@ export class Category{
                 <td class="action-btn-body">
                     <div class="action-btn">
                         <button class="edit-btn js-edit-btn"
-                        data-book-id="${id}">
+                        data-category-id="${id}">
                             <img src="svg/edit.svg" alt="Edit Icon">
                         </button>
                         <button class="delete-btn js-delete-btn"
-                        data-book-id="${id}">
+                        data-category-id="${id}">
                             <img src="svg/delete.svg" alt="Delete Icon">
                         </button>
                     </div>

@@ -10,6 +10,7 @@ const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
 const main = document.querySelector('main');
 const modal = document.getElementById('add-category-modal');
+const tableBody = document.querySelector('.category-items-body');
 
 // get the current user from localStorage to associate categories with the user
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -39,8 +40,21 @@ addCategoryBtn.addEventListener('click', (e) => {
     addCategToggleModal();
 });
 
+// event delegation for delete buttons and edit buttons
+tableBody.addEventListener('click', (e) =>{
 
+    const deleteBtn = e.target.closest('.js-delete-btn');
+    if (deleteBtn) {
+        const categoryId = Number(deleteBtn.dataset.categoryId);
+        userCategories.deleteCategory(categoryId);
 
+        const tableRow = document.querySelector(`.row-${categoryId}`);
+        if (tableRow) tableRow.remove();
+        return;
+    }
+});
+
+console.log(userCategories.category);
 
 const addCategToggleModal = () => {
     modal.classList.toggle('show-open-category-modal');
