@@ -8,7 +8,7 @@
 
 body{
     position: relative;
-    background-color: #ececec5a;
+    background-color: #ececec3c;
     font-family: 'Inter', sans-serif;
     margin: 0;
     margin-top: 85px;
@@ -404,25 +404,28 @@ main{
         display: none;
         margin-top: 3em;
         width: 100%;
-        padding: 0 10px 20px 10px;
-        border-collapse: collapse;
+        border-collapse: separate;
         border-spacing: 0;
-        border-radius: 8px;
+        border: 1px solid #bababa7a; /* Kulay ng border sa pinaka-labas */
+        border-radius: 12px;
+        overflow: hidden;
         
         thead{
+            border-radius: 12px;
             background-color: #d5d5d558;
         }
         tbody{
             background-color: white;
         }
-        
-        tr{
-            border-bottom: 1px solid #bababa2f;
+
+        tbody tr:last-child td {
+            border-bottom: none;
         }
         
         th, td{
             text-align: left;
             padding: 17px;
+            border-bottom: 1px solid #bababa2f;
         }
 
         th{
@@ -532,6 +535,137 @@ main{
         }
     }
 
+}
+
+.edit-category-modal{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    max-width: 450px;
+    z-index: 1000;
+    padding: 1.5em 2em;
+    background: white;
+    border-radius: 16px;
+
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        
+    border: 1px solid rgba(226, 232, 240, 0.8); /* Napakagaan na border line */
+
+    .edit-category-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3{
+            font-family: 'Poppins';
+            font-weight: 600;
+        }
+
+        .back-btn-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            img{
+                width: 20px;
+            }
+        }
+    }
+
+    .category-edit-form{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        margin-top: 1em;
+
+        .info-container{
+            margin-bottom: 10px;
+            h4{
+                font-family: 'Inter';
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+        .form-group-name{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1em;
+            
+            .category-text{
+                padding: 14px 16px;
+                width: 97%;
+                font-size: 15px;
+                border-radius: 10px;
+                border: 1px solid #3d3d3d97;
+            }
+
+            .custom-edit-select{
+                padding: 14px 16px;
+                width: 97%;
+                font-size: 15px;
+                color: black;
+                border-radius: 10px;
+                font-family: 'Inter', sans-serif;
+                border: 1px solid #3d3d3d97;
+                cursor: pointer;
+
+                /* 1. Tinatanggal ang default arrow ng browser */
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+                background-repeat: no-repeat;
+                background-position: right 16px center;
+
+                option{
+                    background-color: #ffffff; 
+                    color: #333333;     
+                    font-family: 'Inter', sans-serif; 
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .form-btn-container{
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            column-gap: 1em;
+            margin-top: 2.5em;
+            height: 40px;
+
+            .save-category{
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-family: 'Poppins';
+                font-size: 13px;
+                color: white;
+                background-color: green;
+                border: none;
+                cursor: pointer;
+            }
+            .cancel-category{
+                color: black;
+                background-color: white;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-family: 'Poppins';
+                font-size: 13px;
+                border: 1px solid #3333338f;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .add-category-modal{
@@ -647,7 +781,7 @@ main{
                 font-family: 'Poppins';
                 font-size: 13px;
                 color: white;
-                background-color: #432aeb;
+                background-color: green;
                 border: none;
                 cursor: pointer;
             }

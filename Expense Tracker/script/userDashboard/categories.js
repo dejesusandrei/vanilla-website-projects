@@ -10,6 +10,7 @@ const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
 const main = document.querySelector('main');
 const modal = document.getElementById('add-category-modal');
+const editModal = document.getElementById('edit-category-modal');
 const tableBody = document.querySelector('.category-items-body');
 
 // get the current user from localStorage to associate categories with the user
@@ -41,20 +42,45 @@ addCategoryBtn.addEventListener('click', (e) => {
 });
 
 // event delegation for delete buttons and edit buttons
+let currentEditingCategoryId = null;
 tableBody.addEventListener('click', (e) =>{
-
     const deleteBtn = e.target.closest('.js-delete-btn');
     if (deleteBtn) {
-        const categoryId = Number(deleteBtn.dataset.categoryId);
+        const categoryId = Number(deleteBtn.getAttribute('data-category-id'));
         userCategories.deleteCategory(categoryId);
 
         const tableRow = document.querySelector(`.row-${categoryId}`);
         if (tableRow) tableRow.remove();
         return;
     }
+
+    const editBtn = e.target.closest('.js-edit-btn');
+    if(editBtn){
+        const categoryId = Number(editBtn.getAttribute('data-category-id'));
+        currentEditingCategoryId = categoryId;
+        userCategories.openEditModal(categoryId);
+        editCategToggleModal();
+    }
 });
 
-console.log(userCategories.category);
+editModal.addEventListener('click', (e) =>{
+    e.preventDefault();
+    if(e.target.closest('#close-edit-categ-modal'))  {editCategToggleModal(); return;}
+    if(e.target.closest('#cancel-edit-category')) {editCategToggleModal(); return;}
+    if(e.target.closest('#save-changes')){
+        const categoryId = currentEditingCategoryId;
+        const categoryName = document.getElementById('categoryEditName').value.trim();
+        const categoryType = document.getElementById('typeEditCategory').value.trim();
+
+        if(!categoryName || !categoryType){
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        userCategories.editCategory(categoryId, categoryName, categoryType, e);
+        editCategToggleModal();
+    }
+});
 
 const addCategToggleModal = () => {
     modal.classList.toggle('show-open-category-modal');
@@ -63,17 +89,16 @@ const addCategToggleModal = () => {
     main.classList.toggle('blur-effect');
 };
 
-emptyStateAddCategoryBtn.addEventListener('click', () =>{
-    addCategToggleModal();
-});
+const editCategToggleModal = () => {
+    editModal.classList.toggle('show-open-category-modal');
+    header.classList.toggle('blur-effect');
+    sidebar.classList.toggle('blur-effect');
+    main.classList.toggle('blur-effect');
+};
 
-closeAddCategModal.addEventListener('click', () =>{
-    addCategToggleModal();
-});
-
-cancelModal.addEventListener('click', () =>{
-    addCategToggleModal();
-});
+emptyStateAddCategoryBtn.addEventListener('click', () => addCategToggleModal());
+closeAddCategModal.addEventListener('click', () => addCategToggleModal());
+cancelModal.addEventListener('click', () => addCategToggleModal());
 
 userCategories.renderCategory();
 userCategories.isCategoryEmpty();

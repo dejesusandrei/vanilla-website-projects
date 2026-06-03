@@ -57,6 +57,28 @@ export class Category{
         event.target.closest('.category-form').reset();
     }
 
+    editCategory(id, categoryName, type, event){
+        let matchingItem;
+        this.category.forEach(categoryItem =>{
+            if(categoryItem.id === Number(id)){
+                matchingItem = categoryItem;
+            }
+        });
+
+        const categoryNameCheck = categoryName.trim().toLowerCase();
+        const findDuplicateCategory = this.category.find(cat => cat.categoryName.toLowerCase() === categoryNameCheck);
+        if(findDuplicateCategory){
+            alert('Error this category already exist');
+            event.target.closest('.category-edit-form').reset();
+            return;
+        }
+
+        matchingItem.categoryName = categoryName;
+        matchingItem.type = type;
+        this.saveToStorage();
+        this.renderCategory();
+    }
+
     deleteCategory(categoryId){
         let newArr = [];
         this.category.forEach(categoryItem =>{
@@ -68,6 +90,45 @@ export class Category{
         this.saveToStorage();
         this.isCategoryEmpty();
         this.renderCategory();
+    }
+
+    openEditModal(id){
+        const editCategoryModalContent = document.querySelector('.edit-category-modal');
+        const categoryItem = this.category.find(cat => cat.id === id);
+        const innnerModalHTML = 
+        `
+        <div class="edit-category-header">
+            <h3>Edit Category</h3>
+            <div class="back-btn-container" id="close-edit-categ-modal">
+                <img src="svg/x.svg" alt="X button">
+            </div>
+        </div>
+        <form class="category-edit-form" id="edit-category-from">
+            <div class="info-container">
+                <h4>Category name</h4>
+                <div class="form-group-name">
+                    <input class="category-text" type="text" id="categoryEditName" value="${categoryItem.categoryName}" required>
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Type</h4>
+                <div class="form-group-name">
+                    <select name="category-type" class="custom-edit-select" id="typeEditCategory" title="Category type">
+                        <option value="" disabled selected hidden>Select category type</option>
+                        <option value="Expense" ${categoryItem.type === 'Expense' ? 'selected' : ''}>Expense</option>
+                        <option value="Income" ${categoryItem.type === 'Income' ? 'selected' : ''}>Income</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-btn-container">
+                <button class="cancel-category js-cancel-edit-category" id="cancel-edit-category">Cancel</button>
+                <button class="save-category js-save-edit-category" id="save-changes">Save Changes</button>
+            </div>
+        </form>
+        `;
+        if(editCategoryModalContent){
+            editCategoryModalContent.innerHTML = innnerModalHTML;
+        }
     }
 
     renderCategory(){
