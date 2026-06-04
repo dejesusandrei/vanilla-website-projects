@@ -1,4 +1,5 @@
 import { Transaction } from "../../data/transaction.js";
+import { formatCurrency } from '../../script/utility/money.js';
 
 // get the current user from localStorage to associate transactions with the user
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
