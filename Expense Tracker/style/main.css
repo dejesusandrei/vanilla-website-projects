@@ -8,7 +8,7 @@
 
 body{
     position: relative;
-    background-color: #ececec3c;
+    background: #F8FAFC;
     font-family: 'Inter', sans-serif;
     margin: 0;
     margin-top: 85px;
@@ -344,6 +344,201 @@ main{
     }
 }
 
+.transaction-section{
+    display: flex;
+    flex-direction: column;
+    
+
+    .transaction-header-section{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        .transaction-text{
+            display: flex;
+            flex-direction: column;
+            row-gap: 2px;
+            h1{
+                font-family: 'Poppins';
+                font-size: 1.8rem;
+                font-weight: 650;
+            }
+            p{
+                font-size: 14px;
+                font-weight: 500;
+                color: #3d3d3d;
+                font-family: 'Poppins';
+            }
+        }
+        .transaction-add-btn{
+            display: flex;
+            justify-content: end;
+            align-items: end;
+            
+            .add-transaction-btn{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap: 10px;
+                padding: 10px 15px;
+                background-color: #432aeb;
+                border-radius: 8px;
+                cursor: pointer;
+
+                .add-icon-transaction{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img{
+                        width: 18px;
+                    }
+                }
+                p{
+                    color: white;
+                    font-size: 14px;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+
+    .search-transaction-container{
+        display: flex;
+        align-items: center;
+        margin-top: 2em;
+        height: 90px;
+        border-radius: 8px;
+        padding: 1em 1.5em;
+        background-color: white;
+        box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 8px 24px rgba(0, 0, 0, 0.06);
+
+        .search-bar-container{
+            display: flex;
+            width: 100%;
+            max-width: 450px;
+            height: 50px;
+            border-radius: 10px;
+
+            .search-bar-icon{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 50px;
+                padding: 0 1em;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                border-top: 1px solid rgba(0, 0, 0, 0.165);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.165);
+                border-left: 1px solid rgba(0, 0, 0, 0.165);
+                button{
+                    background-color: transparent;
+                    border: none;
+                }
+                img{
+                    width: 23px;
+                }
+            }
+
+            .input-container{
+                width: 100%;
+                input{
+                    background-color: transparent;
+                    font-family: 'Poppins';
+                    font-size: 15px;
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    border-top: 1px solid rgba(0, 0, 0, 0.165);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.165);
+                    border-right: 1px solid rgba(0, 0, 0, 0.165);
+                }
+
+                input:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    table{
+        display: table;
+        margin-top: 2em;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 8px 24px rgba(0, 0, 0, 0.06);
+        border-radius: 12px;
+        overflow: hidden;
+
+        thead{
+            border-radius: 12px;
+            background-color: #d5d5d527;
+        }
+        tbody{
+            background-color: white;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        th, td{
+            text-align: left;
+            padding: 17px;
+            border-bottom: 1px solid #bababa2f;
+        }
+
+        th{
+            font-size: 14px;
+        }
+        td{
+            font-size: 14px;
+        }
+        .action-text{
+            text-align: center;
+        }
+        
+        .action-btn-body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .action-btn{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                column-gap: 1em;
+                height: 35px;
+                
+                button{
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    width: 35px;
+                    height: 35px;
+                    img{
+                        width: 20px;
+                    }
+                }
+
+                .edit-btn{
+                    background-color: rgba(67, 67, 250, 0.123);
+                }
+                .delete-btn{
+                    background-color: rgba(255, 0, 0, 0.123);
+                    img{
+                        width: 21px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .categories-section{
     display: flex;
     flex-direction: column;
@@ -406,13 +601,15 @@ main{
         width: 100%;
         border-collapse: separate;
         border-spacing: 0;
-        border: 1px solid #bababa7a; /* Kulay ng border sa pinaka-labas */
+        box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 8px 24px rgba(0, 0, 0, 0.06);
         border-radius: 12px;
         overflow: hidden;
         
         thead{
             border-radius: 12px;
-            background-color: #d5d5d558;
+            background-color: #d5d5d527;
         }
         tbody{
             background-color: white;
@@ -429,7 +626,7 @@ main{
         }
 
         th{
-            font-size: 16px;
+            font-size: 14px;
         }
         td{
             font-size: 14px;
