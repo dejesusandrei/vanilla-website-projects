@@ -41,7 +41,7 @@ export class Transaction{
             type,
             amount
         };
-        this.category.push(newTransactionObj);
+        this.transaction.push(newTransactionObj);
         this.saveToStorage();
         this.isTransactionEmpty();
         this.renderTransaction();
@@ -65,6 +65,33 @@ export class Transaction{
     renderTransaction(){
         let transactionHTML = '';
         const tableBody = document.querySelector('.transaction-items');
-        
+        this.transaction.forEach(transactionnItem =>{
+            const {id, date, description, category, type, amount} = transactionnItem;
+            
+            if(!date || !description || !category || !type || !amount) return;
+            transactionHTML +=
+            `
+            <tr class="row-${id}" data-category-id="${id}">
+                <td>${date}</td>
+                <td>${description}</td>
+                <td>${category}</td>
+                <td>${type}</td>
+                <td>${amount}</td>
+                <td class="action-btn-body">
+                    <div class="action-btn">
+                        <button class="edit-btn js-edit-btn"
+                        data-category-id="${id}">
+                            <img src="svg/edit.svg" alt="Edit Icon">
+                        </button>
+                        <button class="delete-btn js-delete-btn"
+                        data-category-id="${id}">
+                            <img src="svg/delete.svg" alt="Delete Icon">
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            `;
+        });
+        tableBody.innerHTML = transactionHTML;
     }
 }

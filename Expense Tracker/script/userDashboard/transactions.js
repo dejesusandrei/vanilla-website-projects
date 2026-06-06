@@ -2,6 +2,7 @@ import { Transaction } from "../../data/transaction.js";
 import { formatDate } from '../../script/utility/date.js';
 
 const emptyAddTransacBtn = document.getElementById('empty-state-add-transaction');
+const addTransactionBtn = document.querySelector('.add-transaction-btn');
 const cancelTransac = document.getElementById('cancel-transaction');
 const closeAddTransacModal = document.getElementById('close-add-transaction-modal');
 const modal = document.getElementById('add-transaction-modal');
@@ -27,8 +28,9 @@ saveBtn.addEventListener('click', (e) =>{
     const categorySelect = document.getElementById('category-transaction');
     const categoryName = categorySelect.value;
     const categoryType = categorySelect.selectedOptions[0].getAttribute('data-type-category');
+    const descriptionText = document.getElementById('description').value;
 
-    if(!categoryName || !categoryType){
+    if(!categoryName || !categoryType || !descriptionText){
         alert('Please fill in all fields.');
         return;
     }
@@ -43,17 +45,20 @@ saveBtn.addEventListener('click', (e) =>{
     }
 
     const date = document.getElementById('transaction-date').value;
+    if(!date) {
+        alert('Please select a valid date.');
+        return;
+    }
     const formattedDate = formatDate(date);
 
-    console.log(categoryName);
-    console.log(categoryType);
-    console.log(incomeNumbers);
-    console.log(formattedDate);
+    userTransaction.addTransaction(formattedDate, descriptionText, categoryName, categoryType, incomeNumbers, e);
+    addTransacToggleModal();
 });
 
 emptyAddTransacBtn.addEventListener('click', () => addTransacToggleModal());
 closeAddTransacModal.addEventListener('click', () => addTransacToggleModal());
 cancelTransac.addEventListener('click', () => addTransacToggleModal());
+addTransactionBtn.addEventListener('click', () => addTransacToggleModal());
 
 const addTransacToggleModal = () => {
     modal.classList.toggle('show-open-category-modal');
@@ -63,4 +68,4 @@ const addTransacToggleModal = () => {
 };
 
 userTransaction.isTransactionEmpty();
-console.log(saveUser);
+userTransaction.renderTransaction();
