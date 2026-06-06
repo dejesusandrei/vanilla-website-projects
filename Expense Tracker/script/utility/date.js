@@ -1,6 +1,6 @@
 export function formatDate(dateString) {
     // 1. Kung walang date na pinili ang user, ibalik ang blank
-    if (!dateString) return ""; 
+    if (!dateString) return; 
 
     // 2. Diretso gawa agad ng Date Object (kayang-kaya intindihin ng JS ang YYYY-MM-DD)
     const dateObj = new Date(dateString); 

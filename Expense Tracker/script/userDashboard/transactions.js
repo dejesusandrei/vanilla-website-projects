@@ -1,5 +1,4 @@
 import { Transaction } from "../../data/transaction.js";
-import { formatDate } from '../../script/utility/date.js';
 
 const emptyAddTransacBtn = document.getElementById('empty-state-add-transaction');
 const addTransactionBtn = document.querySelector('.add-transaction-btn');
@@ -17,41 +16,32 @@ const saveUser = JSON.parse(localStorage.getItem('currentUser'));
 let userTransaction;
 
 if(saveUser){
-    userTransaction = new Transaction(`transaction-${saveUser}`);
+    userTransaction = new Transaction(`transaction-${saveUser.id}`);
 } else{
     window.location.href = 'login.html';
 }
 
 saveBtn.addEventListener('click', (e) =>{
     e.preventDefault();
-
     const categorySelect = document.getElementById('category-transaction');
     const categoryName = categorySelect.value;
     const categoryType = categorySelect.selectedOptions[0].getAttribute('data-type-category');
     const descriptionText = document.getElementById('description').value;
+    const rawAmount = document.getElementById('incomeText').value;
+    const rawDate = document.getElementById('transaction-date').value;
 
-    if(!categoryName || !categoryType || !descriptionText){
+    if(!categoryName || !categoryType || !descriptionText || !rawAmount || !rawDate){
         alert('Please fill in all fields.');
         return;
     }
-    
-    const incomeText = document.getElementById('incomeText');
-    // "Huwag mong buburahin ang mga numero at ang tuldok"
-    const cleanInput = incomeText.value.replace(/[^0-9.]/g, '');
-    const incomeNumbers = parseFloat(cleanInput);
-    if (isNaN(incomeNumbers) || incomeNumbers <= 0) {
-        alert('Please enter a valid number for income.');
+
+    const parsedAmount = parseFloat(rawAmount);
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+        alert('Please enter a valid amount.');
         return;
     }
 
-    const date = document.getElementById('transaction-date').value;
-    if(!date) {
-        alert('Please select a valid date.');
-        return;
-    }
-    const formattedDate = formatDate(date);
-
-    userTransaction.addTransaction(formattedDate, descriptionText, categoryName, categoryType, incomeNumbers, e);
+    userTransaction.addTransaction(rawDate, descriptionText, categoryName, categoryType, rawAmount, e);
     addTransacToggleModal();
 });
 
@@ -67,5 +57,7 @@ const addTransacToggleModal = () => {
     main.classList.toggle('blur-effect');
 };
 
+
+console.log(saveUser);
 userTransaction.isTransactionEmpty();
 userTransaction.renderTransaction();
