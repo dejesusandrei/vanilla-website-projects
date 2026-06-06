@@ -1,5 +1,4 @@
 import { Transaction } from "../../data/transaction.js";
-import { formatCurrency } from '../../script/utility/money.js';
 
 const emptyAddTransacBtn = document.getElementById('empty-state-add-transaction');
 const cancelTransac = document.getElementById('cancel-transaction');
@@ -20,9 +19,9 @@ if(saveUser){
     window.location.href = 'login.html';
 }
 
-emptyAddTransacBtn.addEventListener('click', () =>addTransacToggleModal());
-closeAddTransacModal.addEventListener('click', () =>addTransacToggleModal());
-cancelTransac.addEventListener('click', () =>addTransacToggleModal());
+emptyAddTransacBtn.addEventListener('click', () => addTransacToggleModal());
+closeAddTransacModal.addEventListener('click', () => addTransacToggleModal());
+cancelTransac.addEventListener('click', () => addTransacToggleModal());
 
 const addTransacToggleModal = () => {
     modal.classList.toggle('show-open-category-modal');

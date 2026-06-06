@@ -101,4 +101,5 @@ closeAddCategModal.addEventListener('click', () => addCategToggleModal());
 cancelModal.addEventListener('click', () => addCategToggleModal());
 
 userCategories.renderCategory();
+userCategories.renderTransactionCategory();
 userCategories.isCategoryEmpty();
