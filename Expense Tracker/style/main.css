@@ -928,6 +928,226 @@ main{
     }
 }
 
+.add-transaction-modal{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    max-width: 500px;
+    z-index: 1000;
+    padding: 1.5em 2em;
+    background: white;
+    border-radius: 16px; 
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.8); /* Napakagaan na border line */
+
+    .add-transaction-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3{
+            font-family: 'Poppins';
+            font-weight: 600;
+        }
+
+        .back-btn-transaction-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            img{
+                width: 20px;
+            }
+        }
+    }
+
+    .transaction-form{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1em;
+        margin-top: 1.3em;
+
+        .info-container{
+            margin-bottom: 10px;
+            h4{
+                font-family: 'Inter';
+                font-weight: 500;
+                font-size: 16px;
+            }
+
+            .type-btn-container{
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                column-gap: 5px;
+                margin-top: 1em;
+                .type-btn{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    column-gap: 10px;
+                    padding: 12px 16px;
+                    background-color: white;
+                    border: 1px solid #3333333f;
+                    border-radius: 10px;
+
+                    .arrow-container{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 25px;
+                        height: 25px;
+                        img{
+                            width: 20px;
+                        }
+                        .arrow-up{
+                            width: 22px;
+                        }
+                    }
+
+                    .text-container{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        p{
+                            text-align: center;
+                            font-family: 'Poppins';
+                            font-weight: 500;
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .form-group-name{
+            display: flex;
+            align-items: center;
+            margin-top: 1em;
+
+            .pesos-container{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 14px 20px;
+                background-color: #3333331f;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                cursor: pointer;
+                h4{
+                    font-family: 'Inter';
+                    font-size: 15px;
+                }
+            }
+            .income-text{
+                padding: 14px 16px;
+                width: 97%;
+                font-size: 15px;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                border-left: 1px solid transparent;
+                border: 1px solid #3d3d3d43;
+            }
+            .custom-select{
+                padding: 14px 16px;
+                width: 100%;
+                font-size: 15px;
+                color: black;
+                border-radius: 10px;
+                font-family: 'Inter', sans-serif;
+                border: 1px solid #3d3d3d43;
+                cursor: pointer;
+
+                /* 1. Tinatanggal ang default arrow ng browser */
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+                background-repeat: no-repeat;
+                background-position: right 16px center;
+
+                option{
+                    background: #FFFFFF;
+                    color: #111827;  
+                    font-family: 'Inter', sans-serif; 
+                    font-size: 16px;
+                    padding: 10px;
+                }
+            }
+            .date{
+                width: 100%;
+                padding: 14px 16px;
+                border: 1px solid #3d3d3d43;
+                border-radius: 12px;
+                background: #FFFFFF;
+                font-size: 15px;
+                color: #111827;
+                outline: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-family: 'Inter';
+                font-size: 15px;
+            }
+            textarea{
+                width: 100%;
+                min-height: 120px;
+                padding: 14px 16px;
+                border: 1px solid #3d3d3d43;
+                border-radius: 12px;
+                resize: vertical;
+                outline: none;
+                text-align: left;
+                font-size: 15px;
+                font-family: inherit;
+                background: #FFFFFF;
+                transition: all 0.3s ease;
+            }
+        }
+
+        .form-btn-container{
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            column-gap: 1em;
+            height: 40px;
+
+            .save-transaction{
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-family: 'Poppins';
+                font-size: 13px;
+                color: white;
+                background-color: green;
+                border: none;
+                cursor: pointer;
+            }
+            .cancel-transaction{
+                color: black;
+                background-color: white;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-family: 'Poppins';
+                font-size: 13px;
+                border: 1px solid #3333338f;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.form-group-name .date:hover{
+    border-color: #C7D2FE;
+}
+
+/* Add Category Modal */
 .add-category-modal{
     display: none;
     flex-direction: column;
@@ -1019,10 +1239,11 @@ main{
                 background-position: right 16px center;
 
                 option{
-                    background-color: #ffffff; 
-                    color: #333333;     
+                    background: #FFFFFF;
+                    color: #111827;  
                     font-family: 'Inter', sans-serif; 
                     font-size: 16px;
+                    padding: 10px;
                 }
             }
         }
@@ -1060,6 +1281,9 @@ main{
 }
 
 .category-text:focus{
+    outline: none;
+}
+.income-text:focus{
     outline: none;
 }
 

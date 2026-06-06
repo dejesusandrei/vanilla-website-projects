@@ -289,6 +289,73 @@
         </section>
     </main>
     
+    <!-- Add Transaction Modal -->
+    <div class="add-transaction-modal" id="add-transaction-modal">
+        <div class="add-transaction-header">
+            <h3>Add Transaction</h3>
+            <div class="back-btn-transaction-container" id="close-add-transaction-modal">
+                <img src="svg/x.svg" alt="X button">
+            </div>
+        </div>
+
+        <form class="transaction-form" id="add-transaction-from">
+            <div class="info-container">
+                <h4>Type</h4>
+                <div class="type-btn-container">
+                    <button class="type-btn expense">
+                        <div class="arrow-container">
+                            <img src="svg/arrow-down.png" alt="Arrow down icon">
+                        </div>
+                        <div class="text-container">
+                            <p>Expense</p>
+                        </div>
+                    </button>
+                    <button class="type-btn income">
+                        <div class="arrow-container">
+                            <img class="arrow-up" src="svg/arrow-up.png" alt="Arrow up icon">
+                        </div>
+                        <div class="text-container">
+                            <p>Income</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Amount</h4>
+                <div class="form-group-name">
+                    <div class="pesos-container">
+                        <h4>₱</h4>
+                    </div>
+                    <input class="income-text" type="text" id="incomeText" placeholder="Enter amount" name="income_text">
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Category</h4>
+                <div class="form-group-name">
+                    <select name="category-type" class="custom-select" id="category-transaction" title="Category type">
+                        <option value="" disabled selected hidden>Select category</option>
+                    </select>
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Date</h4>
+                <div class="form-group-name">
+                    <input class="date" type="date" id="transaction-date">
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Description </h4>
+                <div class="form-group-name">
+                    <textarea id="description" name="description" placeholder="Enter description..." maxlength="150"></textarea>
+                </div>
+            </div>
+            <div class="form-btn-container">
+                <button class="cancel-transaction js-cancel-transaction" id="cancel-transaction">Cancel</button>
+                <button class="save-transaction js-save-transaction" id="save-transaction">Save Transaction</button>
+            </div>
+        </form>
+    </div>
+
     <!-- Add Category Modal -->
     <div class="add-category-modal" id="add-category-modal">
         <div class="add-category-header">
@@ -302,7 +369,7 @@
             <div class="info-container">
                 <h4>Category name</h4>
                 <div class="form-group-name">
-                    <input class="category-text" type="text" id="categoryName" placeholder="e.g. Food, Transport" required>
+                    <input class="category-text" type="text" id="categoryName" placeholder="e.g. Food, Transport">
                 </div>
             </div>
             <div class="info-container">
