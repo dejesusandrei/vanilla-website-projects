@@ -61,4 +61,10 @@ export class Transaction{
         emptyTransactionContainer.style.display = this.transaction.length === 0 ? 'flex' : 'none';
         tableContainer.style.display = this.transaction.length === 0 ? 'none' : 'table';
     }
+
+    renderTransaction(){
+        let transactionHTML = '';
+        const tableBody = document.querySelector('.transaction-items');
+        
+    }
 }

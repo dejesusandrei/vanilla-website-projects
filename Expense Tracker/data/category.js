@@ -138,12 +138,12 @@ export class Category{
         let transactionCategoryHTML = '<option value="" disabled selected hidden>Select category</option>';
         const categoryTransaction = document.getElementById('category-transaction');
         this.category.forEach(categoryItem =>{
-            const { categoryName }  = categoryItem;
+            const { categoryName, type }  = categoryItem;
 
             if(!categoryName) return;
             transactionCategoryHTML +=
             `
-                <option value="${categoryName}">${categoryName}</option>
+                <option value="${categoryName}" data-type-category="${type}">${categoryName}</option>
             `;
         });
         categoryTransaction.innerHTML = transactionCategoryHTML;

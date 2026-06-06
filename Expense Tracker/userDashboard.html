@@ -219,6 +219,7 @@
                         <th class="action-text">Action</th>
                     </tr>
                 </thead>
+                <tbody class="transaction-items transaction-items-body"></tbody>
             </table>
 
             <!-- If no transaction yet -->
@@ -235,7 +236,6 @@
                     <p>Add Transaction</p>
                 </div>
             </div>
-
         </section>
         
         <!-- Categories -->
@@ -300,24 +300,10 @@
 
         <form class="transaction-form" id="add-transaction-from">
             <div class="info-container">
-                <h4>Type</h4>
-                <div class="type-btn-container">
-                    <button class="type-btn expense">
-                        <div class="arrow-container">
-                            <img src="svg/arrow-down.png" alt="Arrow down icon">
-                        </div>
-                        <div class="text-container">
-                            <p>Expense</p>
-                        </div>
-                    </button>
-                    <button class="type-btn income">
-                        <div class="arrow-container">
-                            <img class="arrow-up" src="svg/arrow-up.png" alt="Arrow up icon">
-                        </div>
-                        <div class="text-container">
-                            <p>Income</p>
-                        </div>
-                    </button>
+                <h4>Category</h4>
+                <div class="form-group-name">
+                    <select name="category-type" class="custom-select" id="category-transaction" title="Category type">
+                    </select>
                 </div>
             </div>
             <div class="info-container">
@@ -327,13 +313,6 @@
                         <h4>₱</h4>
                     </div>
                     <input class="income-text" type="text" id="incomeText" placeholder="Enter amount" name="income_text">
-                </div>
-            </div>
-            <div class="info-container">
-                <h4>Category</h4>
-                <div class="form-group-name">
-                    <select name="category-type" class="custom-select" id="category-transaction" title="Category type">
-                    </select>
                 </div>
             </div>
             <div class="info-container">
