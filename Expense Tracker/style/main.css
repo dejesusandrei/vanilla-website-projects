@@ -933,7 +933,7 @@ main{
     flex-direction: column;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 45%;
     transform: translate(-50%, -50%);
     width: 40%;
     max-width: 500px;
@@ -1153,7 +1153,7 @@ main{
     flex-direction: column;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 45%;
     transform: translate(-50%, -50%);
     width: 40%;
     max-width: 450px;

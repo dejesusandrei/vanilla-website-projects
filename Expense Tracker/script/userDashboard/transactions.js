@@ -24,15 +24,12 @@ emptyAddTransacBtn.addEventListener('click', () =>addTransacToggleModal());
 closeAddTransacModal.addEventListener('click', () =>addTransacToggleModal());
 cancelTransac.addEventListener('click', () =>addTransacToggleModal());
 
-
-
 const addTransacToggleModal = () => {
     modal.classList.toggle('show-open-category-modal');
     header.classList.toggle('blur-effect');
     sidebar.classList.toggle('blur-effect');
     main.classList.toggle('blur-effect');
 };
-
 
 userTransaction.isTransactionEmpty();
 console.log(saveUser);
