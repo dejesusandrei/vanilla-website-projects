@@ -126,9 +126,7 @@ export class Category{
             </div>
         </form>
         `;
-        if(editCategoryModalContent){
-            editCategoryModalContent.innerHTML = innnerModalHTML;
-        }
+        if(editCategoryModalContent) editCategoryModalContent.innerHTML = innnerModalHTML;
     }
 
     renderTransactionCategory(){

@@ -51,16 +51,80 @@ export class Transaction{
         event.target.closest('.transaction-form').reset();
     }
 
-    deleteTransaction(transactionId){
-        this.transaction = this.transaction.filter(transac => transac.id !== transactionId);
-        const tableRow = document.querySelector(`.row-${transactionId}`);
-        if(tableRow){
-            tableRow.remove();
+    editTransaction(transactionId, date, description, category, type, amount){
+        const matchingItem = this.transaction.find(transac => transac.id === transactionId);
+
+        if(matchingItem){
+            matchingItem.type = type;
+            matchingItem.amount = amount;
+            matchingItem.date = date;
+            matchingItem.category = category; 
+            matchingItem.description = description; 
         }
+
         this.saveToStorage();
         this.isTransactionEmpty();
         this.renderTransaction();
-        console.log(this.transaction);
+    }
+
+    deleteTransaction(transactionId){
+        this.transaction = this.transaction.filter(transac => transac.id !== transactionId);
+        const tableRow = document.querySelector(`.row-${transactionId}`);
+        if(tableRow) tableRow.remove();
+        this.saveToStorage();
+        this.isTransactionEmpty();
+        this.renderTransaction();
+    }
+
+    openEditModal(transactionId){
+        const editTransacModalContent = document.querySelector('.edit-transaction-modal');
+        const transactionItem = this.transaction.find(transac => transac.id === transactionId);
+
+        const innerModalHTML = 
+        `
+        <div class="edit-transaction-header">
+            <h3>Edit Transaction</h3>
+            <div class="back-btn-transaction-container" id="close-edit-transaction-modal">
+                <img src="svg/x.svg" alt="X button">
+            </div>
+        </div>
+
+        <form class="transaction-form" id="edit-transaction-from">
+            <div class="info-container">
+                <h4>Category</h4>
+                <div class="form-group-name">
+                    <select name="category-type" class="custom-select" id="category-edit-transaction" value="${transactionItem.category}" title="Category type">
+                    </select>
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Amount</h4>
+                <div class="form-group-name">
+                    <div class="pesos-container">
+                        <h4>₱</h4>
+                    </div>
+                    <input class="income-text" type="text" id="incomeEditText" value="${transactionItem.amount}"  placeholder="Enter amount" name="income_text">
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Date</h4>
+                <div class="form-group-name">
+                    <input class="date" type="date" value="${transactionItem.date}" id="transaction-edit-date">
+                </div>
+            </div>
+            <div class="info-container">
+                <h4>Description </h4>
+                <div class="form-group-name">
+                    <textarea id="edit-description" value="${transactionItem.description}"  name="description" placeholder="Enter description..." maxlength="150"></textarea>
+                </div>
+            </div>
+            <div class="form-btn-container">
+                <button class="cancel-transaction js-cancel-transaction" id="cancel-edit-transaction">Cancel</button>
+                <button class="save-transaction js-save-transaction" id="save-edit-transaction">Save Changes</button>
+            </div>
+        </form>
+        `;
+        if(editTransacModalContent) editTransacModalContent.innerHTML = innerModalHTML;
     }
 
     isTransactionEmpty(){
