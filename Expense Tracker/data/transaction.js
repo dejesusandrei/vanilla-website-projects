@@ -52,8 +52,20 @@ export class Transaction{
         event.target.closest('.transaction-form').reset();
     }
 
-    editTransaction(transactionId, date, description, category, type, amount){
+    editTransaction(transactionId, date, description, category, type, amount, event){
         const matchingItem = this.transaction.find(transac => transac.id === transactionId);
+
+        const transactionDescripCheck = description.trim().toLowerCase();
+        const findDuplicateDescription = this.transaction.find(tran => 
+            tran.description.toLowerCase() === transactionDescripCheck && 
+            tran.id !== transactionId 
+        );
+
+        if(findDuplicateDescription){
+            alert('Error this description already exist');
+            event.target.closest('#edit-transaction-form').reset();
+            return;
+        }
 
         if(matchingItem){
             matchingItem.type = type;
@@ -62,7 +74,6 @@ export class Transaction{
             matchingItem.category = category; 
             matchingItem.description = description; 
         }
-
         this.saveToStorage();
         this.isTransactionEmpty();
         this.renderTransaction();

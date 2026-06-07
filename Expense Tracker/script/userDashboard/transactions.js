@@ -15,13 +15,7 @@ const tableBody = document.querySelector('.transaction-items-body');
 
 // get the current user from localStorage to associate transactions with the user
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
-let userTransaction;
-
-if(saveUser){
-    userTransaction = new Transaction(`transaction-${saveUser.id}`);
-} else{
-    window.location.href = 'login.html';
-}
+const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : window.location.href = 'login.html';
 
 saveBtn.addEventListener('click', (e) =>{
     e.preventDefault();
@@ -67,14 +61,35 @@ tableBody.addEventListener('click', (e) =>{
     }
 });
 
-// editModal.addEventListener('click', (e) =>{
-//     e.preventDefault();
-//     if(e.target.closest('#close-edit-transaction-modal'))  {editTransacToggleModal(); return;}
-//     if(e.target.closest('#cancel-edit-transaction')) {editTransacToggleModal(); return;}
-//     if(){
-//         console.log('save');
-//     }
-// });
+editModal.addEventListener('click', (e) =>{
+    e.preventDefault();
+    if(e.target.closest('#close-edit-transaction-modal'))  {editTransacToggleModal(); return;}
+    if(e.target.closest('#cancel-edit-transaction')) {editTransacToggleModal(); return;}
+    if(e.target.closest('#save-edit-transaction')){
+        e.preventDefault();
+        const transactionId = currentEditingCategoryId;
+        const categorySelect = document.getElementById('category-edit-transaction');
+        const categoryName = categorySelect.value;
+        const categoryType = categorySelect.selectedOptions[0].getAttribute('data-type-category');
+        const descriptionText = document.getElementById('edit-description').value;
+        const rawAmount = document.getElementById('incomeEditText').value;
+        const rawDate = document.getElementById('transaction-edit-date').value;
+
+        if(!categoryName || !categoryType || !descriptionText || !rawAmount || !rawDate){
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        const parsedAmount = parseFloat(rawAmount);
+        if (isNaN(parsedAmount) || parsedAmount <= 0) {
+            alert('Please enter a valid amount.');
+            return;
+        }
+
+        userTransaction.editTransaction(transactionId, rawDate, descriptionText, categoryName, categoryType, rawAmount, e);
+        editTransacToggleModal();
+        }
+});
 
 emptyAddTransacBtn.addEventListener('click', () => addTransacToggleModal());
 closeAddTransacModal.addEventListener('click', () => addTransacToggleModal());

@@ -141,7 +141,7 @@ nav{
     .sidebar-list{
         display: flex;
         flex-direction: column;
-        row-gap: 5px;
+        row-gap: 15px;
         transition: width 0.3s ease;
         overflow: hidden;
         .sidebar-links{
@@ -801,8 +801,8 @@ main{
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 45%;
+    left: 45%;
     transform: translate(-50%, -50%);
     width: 40%;
     max-width: 450px;
@@ -932,7 +932,7 @@ main{
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 45%;
     transform: translate(-50%, -50%);
     width: 40%;
@@ -1152,7 +1152,7 @@ main{
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 45%;
     transform: translate(-50%, -50%);
     width: 40%;
@@ -1284,7 +1284,7 @@ main{
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 45%;
     transform: translate(-50%, -50%);
     width: 40%;
