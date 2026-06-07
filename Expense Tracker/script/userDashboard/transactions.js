@@ -10,6 +10,7 @@ const saveBtn = document.getElementById('save-transaction');
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
 const main = document.querySelector('main');
+const tableBody = document.querySelector('.transaction-items-body');
 
 // get the current user from localStorage to associate transactions with the user
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -45,6 +46,22 @@ saveBtn.addEventListener('click', (e) =>{
     addTransacToggleModal();
 });
 
+tableBody.addEventListener('click', (e) =>{
+    const deleteBtn = e.target.closest('.js-delete-btn');
+    if(deleteBtn){
+        const transactionId = Number(deleteBtn.getAttribute('data-category-id'));
+        userTransaction.deleteTransaction(transactionId);
+        return;
+    }
+
+    const editBtn = e.target.closest('.js-edit-btn');
+    if(editBtn){
+        const transactionId = Number(editBtn.getAttribute('data-category-id'));
+        console.log(`edit ${transactionId}`);
+        return;
+    }
+});
+
 emptyAddTransacBtn.addEventListener('click', () => addTransacToggleModal());
 closeAddTransacModal.addEventListener('click', () => addTransacToggleModal());
 cancelTransac.addEventListener('click', () => addTransacToggleModal());
@@ -58,6 +75,6 @@ const addTransacToggleModal = () => {
 };
 
 
-console.log(saveUser);
+console.log(userTransaction.transaction);
 userTransaction.isTransactionEmpty();
 userTransaction.renderTransaction();

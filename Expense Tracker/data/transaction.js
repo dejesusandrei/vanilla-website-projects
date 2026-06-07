@@ -51,6 +51,18 @@ export class Transaction{
         event.target.closest('.transaction-form').reset();
     }
 
+    deleteTransaction(transactionId){
+        this.transaction = this.transaction.filter(transac => transac.id !== transactionId);
+        const tableRow = document.querySelector(`.row-${transactionId}`);
+        if(tableRow){
+            tableRow.remove();
+        }
+        this.saveToStorage();
+        this.isTransactionEmpty();
+        this.renderTransaction();
+        console.log(this.transaction);
+    }
+
     isTransactionEmpty(){
         const addTransactionBtn = document.querySelector('.add-transaction-btn');
         const emptyTransactionContainer = document.querySelector('.empty-transaction');
@@ -81,7 +93,7 @@ export class Transaction{
                 <td>${description}</td>
                 <td>${category}</td>
                 <td>${type}</td>
-                <td class="money-type ${colorClass}">₱${priceSign}${formatCurrency(amount)}</td>
+                <td class="money-type ${colorClass}">${priceSign}₱${formatCurrency(amount)}</td>
                 <td class="action-btn-body">
                     <div class="action-btn">
                         <button class="edit-btn js-edit-btn"

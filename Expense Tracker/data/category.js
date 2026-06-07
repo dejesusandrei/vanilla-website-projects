@@ -79,13 +79,13 @@ export class Category{
     }
 
     deleteCategory(categoryId){
-        let newArr = [];
-        this.category.forEach(categoryItem =>{
-            if(categoryItem.id !== Number(categoryId)){
-                newArr.push(categoryItem);
-            }
-        });
-        this.category = newArr;
+            let newArr = [];
+            this.category.forEach(categoryItem =>{
+                if(categoryItem.id !== Number(categoryId)){
+                    newArr.push(categoryItem);
+                }
+            });
+            this.category = newArr;
         this.saveToStorage();
         this.isCategoryEmpty();
         this.renderCategory();
