@@ -1,5 +1,6 @@
 import { formatDate } from '../script/utility/date.js';
 import { formatCurrency } from '../script/utility/money.js';
+import { Category } from '../data/category.js';
 
 export class Transaction{
     #localStorageKey;
@@ -89,11 +90,11 @@ export class Transaction{
             </div>
         </div>
 
-        <form class="transaction-form" id="edit-transaction-from">
+        <form class="transaction-form" id="edit-transaction-form">
             <div class="info-container">
                 <h4>Category</h4>
                 <div class="form-group-name">
-                    <select name="category-type" class="custom-select" id="category-edit-transaction" value="${transactionItem.category}" title="Category type">
+                    <select name="category-type" class="custom-select" id="category-edit-transaction" title="Category type">
                     </select>
                 </div>
             </div>
@@ -115,7 +116,7 @@ export class Transaction{
             <div class="info-container">
                 <h4>Description </h4>
                 <div class="form-group-name">
-                    <textarea id="edit-description" value="${transactionItem.description}"  name="description" placeholder="Enter description..." maxlength="150"></textarea>
+                    <textarea id="edit-description"  name="description" placeholder="Enter description..." maxlength="150">${transactionItem.description}</textarea>
                 </div>
             </div>
             <div class="form-btn-container">
@@ -125,6 +126,7 @@ export class Transaction{
         </form>
         `;
         if(editTransacModalContent) editTransacModalContent.innerHTML = innerModalHTML;
+        this.renderEditTransactionCategory(transactionId);
     }
 
     isTransactionEmpty(){
@@ -137,6 +139,22 @@ export class Transaction{
         addTransactionBtn.style.display = this.transaction.length === 0 ? 'none' : 'flex';
         emptyTransactionContainer.style.display = this.transaction.length === 0 ? 'flex' : 'none';
         tableContainer.style.display = this.transaction.length === 0 ? 'none' : 'table';
+    }
+
+    renderEditTransactionCategory(transactionId){
+        const saveUser = JSON.parse(localStorage.getItem('currentUser'));
+        const userCategories = saveUser ? new Category(`categories-${saveUser.id}`) : (window.location.href = 'login.html');
+
+        const transactionItem = this.transaction.find(transac => transac.id === transactionId);
+
+        const categoryTransaction = document.getElementById('category-edit-transaction');
+        const defaultOption = `<option value="${transactionItem.category}" data-type-category="${transactionItem.type}">${transactionItem.category}</option>`;
+        const optionsHTML = userCategories.category
+            .filter(item => item.categoryName)
+            .map(({ categoryName, type }) => `
+                <option value="${categoryName}" data-type-category="${type}">${categoryName}</option>
+            `).join('');
+        categoryTransaction.innerHTML = defaultOption + optionsHTML;
     }
 
     renderTransaction(){

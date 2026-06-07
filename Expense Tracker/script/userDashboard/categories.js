@@ -15,13 +15,7 @@ const tableBody = document.querySelector('.category-items-body');
 
 // get the current user from localStorage to associate categories with the user
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
-let userCategories;
-
-if(saveUser){
-    userCategories = new Category(`categories-${saveUser.id}`);
-} else {
-    window.location.href = 'login.html'; 
-}
+const userCategories = saveUser ? new Category(`categories-${saveUser.id}`) : (window.location.href = 'login.html');
 
 saveBtn.addEventListener('click', (e) => {
     e.preventDefault();

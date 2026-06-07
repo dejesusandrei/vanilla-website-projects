@@ -10,6 +10,7 @@ const saveBtn = document.getElementById('save-transaction');
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
 const main = document.querySelector('main');
+const editModal = document.getElementById('edit-transaction-modal');
 const tableBody = document.querySelector('.transaction-items-body');
 
 // get the current user from localStorage to associate transactions with the user
@@ -46,6 +47,7 @@ saveBtn.addEventListener('click', (e) =>{
     addTransacToggleModal();
 });
 
+let currentEditingCategoryId = null;
 tableBody.addEventListener('click', (e) =>{
     const deleteBtn = e.target.closest('.js-delete-btn');
     if(deleteBtn){
@@ -57,10 +59,22 @@ tableBody.addEventListener('click', (e) =>{
     const editBtn = e.target.closest('.js-edit-btn');
     if(editBtn){
         const transactionId = Number(editBtn.getAttribute('data-category-id'));
-        console.log(`edit ${transactionId}`);
+        currentEditingCategoryId = transactionId;
+        userTransaction.openEditModal(transactionId);
+
+        editTransacToggleModal();
         return;
     }
 });
+
+// editModal.addEventListener('click', (e) =>{
+//     e.preventDefault();
+//     if(e.target.closest('#close-edit-transaction-modal'))  {editTransacToggleModal(); return;}
+//     if(e.target.closest('#cancel-edit-transaction')) {editTransacToggleModal(); return;}
+//     if(){
+//         console.log('save');
+//     }
+// });
 
 emptyAddTransacBtn.addEventListener('click', () => addTransacToggleModal());
 closeAddTransacModal.addEventListener('click', () => addTransacToggleModal());
@@ -69,6 +83,13 @@ addTransactionBtn.addEventListener('click', () => addTransacToggleModal());
 
 const addTransacToggleModal = () => {
     modal.classList.toggle('show-open-category-modal');
+    header.classList.toggle('blur-effect');
+    sidebar.classList.toggle('blur-effect');
+    main.classList.toggle('blur-effect');
+};
+
+const editTransacToggleModal = () => {
+    editModal.classList.toggle('show-open-category-modal');
     header.classList.toggle('blur-effect');
     sidebar.classList.toggle('blur-effect');
     main.classList.toggle('blur-effect');

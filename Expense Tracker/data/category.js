@@ -134,7 +134,6 @@ export class Category{
         const categoryTransaction = document.getElementById('category-transaction');
         this.category.forEach(categoryItem =>{
             const { categoryName, type }  = categoryItem;
-
             if(!categoryName) return;
             transactionCategoryHTML +=
             `
