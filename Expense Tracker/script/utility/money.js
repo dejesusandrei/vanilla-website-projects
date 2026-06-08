@@ -1,15 +1,15 @@
 export function formatCurrency(incomeText){
-    if (!incomeText) return;
+    if (incomeText === undefined || incomeText === null || incomeText === '') return '0.00';
 
-    const noCommas = incomeText.replace(/,/g, '');
-    const cleanInput = noCommas.replace(/[^0-9.]/g, '');
-    const incomeNumbers = Math.round(parseFloat(cleanInput));
-    
-    if (isNaN(incomeNumbers) || incomeNumbers <= 0) return;
+    const incomeStr = incomeText.toString();
+    const noCommas = incomeStr.replace(/,/g, '');
+    const cleanInput = noCommas.replace(/[^0-9.-]/g, '');
+    const incomeNumbers = parseFloat(cleanInput);
 
-    const formattedDisplay = incomeNumbers.toLocaleString('en-US', {
+    if (isNaN(incomeNumbers) || incomeNumbers === 0) return '0.00';
+
+    return incomeNumbers.toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
-    return formattedDisplay;
 }

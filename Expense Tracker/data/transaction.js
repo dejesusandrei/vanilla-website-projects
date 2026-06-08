@@ -10,19 +10,60 @@ export class Transaction{
     category;
     type;
     amount;
+    income;
+    expense;
+    balance;
 
     constructor(localStorageKey){
         this.#localStorageKey = localStorageKey;
         this.transaction = undefined;
+        this.income = 0;
+        this.expense = 0;
+        this.balance = 0;
         this.#loadFromStorage();
+        this.calculateSummary();
+        this.isTransactionEmpty();
+        this.renderTransaction();
+        this.renderSummary();
     }
 
     #loadFromStorage(){
-        this.transaction = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
+        const saveData = JSON.parse(localStorage.getItem(this.#localStorageKey));
+
+        this.transaction = saveData ? (saveData.list || []) : [];
+        this.income = saveData ? (saveData.income || 0) : 0;
+        this.expense = saveData ? (saveData.expense || 0) : 0;
+        this.balance = saveData ? (saveData.balance || 0) : 0;
     }
 
     saveToStorage(){
-        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.transaction));
+        this.calculateSummary();
+        const dataToSave = {
+            list: this.transaction,
+            income: this.income,
+            expense: this.expense,
+            balance: this.balance
+        }
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(dataToSave));
+    }
+
+    calculateSummary() {
+        // To prevent NaN
+        const parseToNumber = (val) => {
+            if (!val) return 0;
+            // Tanggalin ang spaces, commas, o peso sign kung sakaling may nakalusot sa storage
+            const clean = val.toString().replace(/[₱,\s]/g, '');
+            const parsed = parseFloat(clean);
+            return isNaN(parsed) ? 0 : parsed;
+        };
+
+        this.income = this.transaction
+            .filter(tran => tran.type === 'Income')
+            .reduce((sum, tran) => sum + parseToNumber(tran.amount), 0);
+        this.expense = this.transaction
+            .filter(tran => tran.type === 'Expense')
+            .reduce((sum, tran) => sum + parseToNumber(tran.amount), 0);
+        this.balance = this.income - this.expense;
     }
 
     addTransaction(date, description, category, type, amount, event){
@@ -30,7 +71,6 @@ export class Transaction{
         const transactionDescripCheck = description.trim().toLowerCase();
 
         const findDuplicateDescription = this.transaction.find(tran => tran.description.toLowerCase() === transactionDescripCheck);
-
         if(findDuplicateDescription){
             alert('Error this description already exist');
             event.target.closest('.transaction-form').reset();
@@ -49,6 +89,7 @@ export class Transaction{
         this.saveToStorage();
         this.isTransactionEmpty();
         this.renderTransaction();
+        this.renderSummary();
         event.target.closest('.transaction-form').reset();
     }
 
@@ -77,6 +118,7 @@ export class Transaction{
         this.saveToStorage();
         this.isTransactionEmpty();
         this.renderTransaction();
+        this.renderSummary();
     }
 
     deleteTransaction(transactionId){
@@ -86,6 +128,7 @@ export class Transaction{
         this.saveToStorage();
         this.isTransactionEmpty();
         this.renderTransaction();
+        this.renderSummary();
     }
 
     openEditModal(transactionId){
@@ -166,6 +209,16 @@ export class Transaction{
                 <option value="${categoryName}" data-type-category="${type}">${categoryName}</option>
             `).join('');
         categoryTransaction.innerHTML = defaultOption + optionsHTML;
+    }
+
+    renderSummary(){
+        const income = document.getElementById('income');
+        const expense = document.getElementById('expense');
+        const balance = document.getElementById('balance');
+
+        if(income) income.textContent = `₱${formatCurrency(this.income)}`;
+        if(expense) expense.textContent = `₱${formatCurrency(this.expense)}`;
+        if(balance) balance.textContent = `₱${formatCurrency(this.balance)}`;
     }
 
     renderTransaction(){

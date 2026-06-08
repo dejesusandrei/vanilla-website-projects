@@ -109,8 +109,3 @@ const editTransacToggleModal = () => {
     sidebar.classList.toggle('blur-effect');
     main.classList.toggle('blur-effect');
 };
-
-
-console.log(userTransaction.transaction);
-userTransaction.isTransactionEmpty();
-userTransaction.renderTransaction();
