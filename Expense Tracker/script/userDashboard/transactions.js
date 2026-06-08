@@ -1,4 +1,5 @@
 import { Transaction } from "../../data/transaction.js";
+import { addedMessage, deletedMessage, editedMessage } from "../controls/toastTransaction.js";
 
 const emptyAddTransacBtn = document.getElementById('empty-state-add-transaction');
 const addTransactionBtn = document.querySelector('.add-transaction-btn');
@@ -39,6 +40,7 @@ saveBtn.addEventListener('click', (e) =>{
 
     userTransaction.addTransaction(rawDate, descriptionText, categoryName, categoryType, rawAmount, e);
     addTransacToggleModal();
+    addedMessage();
 });
 
 let currentEditingCategoryId = null;
@@ -47,6 +49,7 @@ tableBody.addEventListener('click', (e) =>{
     if(deleteBtn){
         const transactionId = Number(deleteBtn.getAttribute('data-category-id'));
         userTransaction.deleteTransaction(transactionId);
+        deletedMessage();
         return;
     }
 
@@ -55,7 +58,6 @@ tableBody.addEventListener('click', (e) =>{
         const transactionId = Number(editBtn.getAttribute('data-category-id'));
         currentEditingCategoryId = transactionId;
         userTransaction.openEditModal(transactionId);
-
         editTransacToggleModal();
         return;
     }
@@ -87,6 +89,7 @@ editModal.addEventListener('click', (e) =>{
         }
 
         userTransaction.editTransaction(transactionId, rawDate, descriptionText, categoryName, categoryType, rawAmount, e);
+        editedMessage();
         editTransacToggleModal();
         }
 });
