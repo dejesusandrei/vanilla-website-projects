@@ -1,4 +1,5 @@
 import { Category } from '../../data/category.js';
+import { addedMessage, deletedMessage, editedMessage } from "../controls/toastCategories.js";
 
 const emptyStateAddCategoryBtn = document.getElementById('empty-state-add-category');
 const closeAddCategModal= document.getElementById('close-add-categ-modal');
@@ -29,6 +30,7 @@ saveBtn.addEventListener('click', (e) => {
 
     userCategories.addCategory(categoryName, categoryType, e);
     addCategToggleModal();
+    addedMessage();
 });
 
 addCategoryBtn.addEventListener('click', (e) => {
@@ -45,6 +47,7 @@ tableBody.addEventListener('click', (e) =>{
 
         const tableRow = document.querySelector(`.row-${categoryId}`);
         if (tableRow) tableRow.remove();
+        deletedMessage();
         return;
     }
 
@@ -73,6 +76,7 @@ editModal.addEventListener('click', (e) =>{
 
         userCategories.editCategory(categoryId, categoryName, categoryType, e);
         editCategToggleModal();
+        editedMessage();
     }
 });
 

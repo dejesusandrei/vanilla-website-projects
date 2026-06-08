@@ -6,7 +6,7 @@ export function addedMessage() {
 
     toast.innerHTML = `
         <img src="svg/check.svg" alt="Check icon">
-        <p>Transaction Added</p>
+        <p>Categories Added</p>
     `;
 
     toastContainer.appendChild(toast);
@@ -34,7 +34,7 @@ export function deletedMessage() {
 
     toast.innerHTML = `
         <img src="svg/delete.png" alt="Xmark icon">
-        <p>Transaction Deleted</p>
+        <p>Categories Deleted</p>
     `;
 
     toastContainer.appendChild(toast);
@@ -62,7 +62,7 @@ export function editedMessage() {
 
     toast.innerHTML = `
         <img src="svg/edit.svg" alt="Edit icon">
-        <p>Transaction Edited</p>
+        <p>Categories Edited</p>
     `;
 
     toastContainer.appendChild(toast);

@@ -212,7 +212,6 @@ nav{
 }
 
 main{
-    height: 90vh;
     width: 100%;
     padding: 1em;
 }
@@ -1498,10 +1497,10 @@ main{
 .toast-container{
     position: absolute;
     top: 30px;
-    right: 20px;
-    width: 17%;
+    right: 10px;
+    width: 200px;
     border-radius: 12px;
-    z-index: 2000;
+    z-index: 1000;
 }
 
 .toast-add,
@@ -1516,6 +1515,7 @@ main{
     margin-top: 1em;
     transition: all 0.3s ease-in-out;
     border-radius: 12px;
+    background-color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.20);
     transform: translateX(100%);
     animation: moveLeft 0.5s linear forwards;
@@ -1538,6 +1538,7 @@ main{
     margin-top: 1em;
     transition: all 0.3s ease-in-out;
     border-radius: 12px;
+    background-color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.20);
     transform: translateX(100%);
     animation: moveLeft 0.5s linear forwards;
@@ -1669,5 +1670,17 @@ select:focus {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes progressBar {
+    100%{
+        width: 0;
+    }
+}
+
+@keyframes moveLeft {
+    100%{
+        transform: translateX(0);
     }
 }
