@@ -97,13 +97,13 @@ export class Category{
         const categoryItem = this.category.find(cat => cat.id === id);
         const innnerModalHTML = 
         `
-        <div class="edit-category-header">
-            <h3>Edit Category</h3>
-            <div class="back-btn-container" id="close-edit-categ-modal">
-                <img src="svg/x.svg" alt="X button">
-            </div>
-        </div>
         <form class="category-edit-form" id="edit-category-from">
+            <div class="edit-category-header">
+                <h3>Edit Category</h3>
+                <div class="back-btn-container" id="close-edit-categ-modal">
+                    <img src="svg/x.svg" alt="X button">
+                </div>
+            </div>
             <div class="info-container">
                 <h4>Category name</h4>
                 <div class="form-group-name">

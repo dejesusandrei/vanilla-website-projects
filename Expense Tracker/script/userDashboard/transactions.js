@@ -95,8 +95,8 @@ editModal.addEventListener('click', (e) =>{
 });
 
 emptyAddTransacBtn.addEventListener('click', () => addTransacToggleModal());
-closeAddTransacModal.addEventListener('click', () => addTransacToggleModal());
-cancelTransac.addEventListener('click', () => addTransacToggleModal());
+closeAddTransacModal.addEventListener('click', (e) =>{e.preventDefault(); e.target.closest('.transaction-form').reset(); addTransacToggleModal()});
+cancelTransac.addEventListener('click', (e) => {e.preventDefault(); e.target.closest('.transaction-form').reset(); addTransacToggleModal()});
 addTransactionBtn.addEventListener('click', () => addTransacToggleModal());
 
 const addTransacToggleModal = () => {

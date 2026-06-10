@@ -62,8 +62,8 @@ tableBody.addEventListener('click', (e) =>{
 
 editModal.addEventListener('click', (e) =>{
     e.preventDefault();
-    if(e.target.closest('#close-edit-categ-modal'))  {editCategToggleModal(); return;}
-    if(e.target.closest('#cancel-edit-category')) {editCategToggleModal(); return;}
+    if(e.target.closest('#close-edit-categ-modal'))  {e.target.closest('.category-edit-form').reset(); editCategToggleModal(); return;}
+    if(e.target.closest('#cancel-edit-category')) {e.target.closest('.category-edit-form').reset(); editCategToggleModal(); return;}
     if(e.target.closest('#save-changes')){
         const categoryId = currentEditingCategoryId;
         const categoryName = document.getElementById('categoryEditName').value.trim();
@@ -95,8 +95,8 @@ const editCategToggleModal = () => {
 };
 
 emptyStateAddCategoryBtn.addEventListener('click', () => addCategToggleModal());
-closeAddCategModal.addEventListener('click', () => addCategToggleModal());
-cancelModal.addEventListener('click', () => addCategToggleModal());
+cancelModal.addEventListener('click', (e) => { e.preventDefault(); e.target.closest('.category-form').reset(); addCategToggleModal();});
+closeAddCategModal.addEventListener('click', (e) => {e.preventDefault(); e.target.closest('.category-form').reset(); addCategToggleModal();});
 
 userCategories.renderCategory();
 userCategories.renderTransactionCategory();

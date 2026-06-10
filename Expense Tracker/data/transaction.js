@@ -137,15 +137,14 @@ export class Transaction{
 
         const innerModalHTML = 
         `
+        <form class="transaction-form" id="edit-transaction-form">
         <div class="edit-transaction-header">
             <h3>Edit Transaction</h3>
             <div class="back-btn-transaction-container" id="close-edit-transaction-modal">
                 <img src="svg/x.svg" alt="X button">
             </div>
         </div>
-
-        <form class="transaction-form" id="edit-transaction-form">
-            <div class="info-container">
+        <div class="info-container">
                 <h4>Category</h4>
                 <div class="form-group-name">
                     <select name="category-type" class="custom-select" id="category-edit-transaction" title="Category type">
