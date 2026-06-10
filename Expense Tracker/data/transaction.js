@@ -233,7 +233,7 @@ export class Transaction{
 
             transactionHTML +=
             `
-            <tr class="row-${id}" data-category-id="${id}">
+            <tr class="row-${id} table-items" data-category-id="${id}">
                 <td>${formatDate(date)}</td>
                 <td>${description}</td>
                 <td>${category}</td>

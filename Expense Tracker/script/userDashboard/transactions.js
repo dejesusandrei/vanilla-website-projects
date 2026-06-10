@@ -7,6 +7,7 @@ const cancelTransac = document.getElementById('cancel-transaction');
 const closeAddTransacModal = document.getElementById('close-add-transaction-modal');
 const modal = document.getElementById('add-transaction-modal');
 const saveBtn = document.getElementById('save-transaction');
+const searchFilter = document.getElementById('search');
 
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
@@ -17,6 +18,21 @@ const tableBody = document.querySelector('.transaction-items-body');
 // get the current user from localStorage to associate transactions with the user
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
 const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : window.location.href = 'login.html';
+
+searchFilter.addEventListener('keyup', () =>{
+    let searchText = searchFilter.value.toLowerCase();
+    let tableBody = document.querySelector('.transaction-items-body');
+    let tableRow = document.querySelectorAll('.table-items');
+
+    tableRow.forEach(tableRowItem =>{
+        const description = tableRowItem.cells[1].textContent.toLowerCase();
+        const category = tableRowItem.cells[2].textContent.toLowerCase();
+
+        if(description.includes(searchText) || category.includes(searchText)){
+            tableRowItem.style.display = '';
+        }else { tableRowItem.style.display = 'none'; }
+    });
+});
 
 saveBtn.addEventListener('click', (e) =>{
     e.preventDefault();
