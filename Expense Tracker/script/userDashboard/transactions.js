@@ -34,7 +34,7 @@ function updateFilter(){
         const category = tableRowItem.cells[2].textContent.toLowerCase();
 
         const matchesText = description.includes(searchText) || category.includes(searchText);
-        const matchesCategory = (selecztedCategory === 'all categories') || (category === selectedCategory)
+        const matchesCategory = (selectedCategory === 'all categories') || (category === selectedCategory)
 
         if(matchesText && matchesCategory){
             tableRowItem.style.display = '';

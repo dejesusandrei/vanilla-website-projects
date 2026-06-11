@@ -1630,12 +1630,22 @@ main{
     border-color: #D1D5DB;
 }
 
-.text-green {
+.text-green, .income-color {
     color: #086c2c !important; /* Magandang shade ng green */
     font-weight: 500;
 }
 
-.text-red {
+.text-red, .expense-color {
+    color: #ef4444 !important; /* Magandang shade ng red */
+    font-weight: 500;
+}
+
+.income-color {
+    color: #086c2c !important; /* Magandang shade ng green */
+    font-weight: 500;
+}
+
+.expense-color {
     color: #ef4444 !important; /* Magandang shade ng red */
     font-weight: 500;
 }

@@ -1,3 +1,5 @@
+import { Transaction } from "../data/transaction.js";
+
 export class Category{
     #localStorageKey;
     category;
@@ -60,26 +62,39 @@ export class Category{
     }
 
     editCategory(id, categoryName, type, event){
-        let matchingItem;
-        this.category.forEach(categoryItem =>{
-            if(categoryItem.id === Number(id)){
-                matchingItem = categoryItem;
-            }
-        });
+        const matchingItem = this.category.find(cat => cat.id === Number(id));
+        const oldCategoryName = matchingItem.categoryName;
+        const oldCategoryType = matchingItem.type;
 
         const categoryNameCheck = categoryName.trim().toLowerCase();
-        const findDuplicateCategory = this.category.find(cat => cat.categoryName.toLowerCase() === categoryNameCheck);
+        const findDuplicateCategory = this.category.find(cat => cat.categoryName.toLowerCase() === categoryNameCheck && cat.id !== id);
         if(findDuplicateCategory){
             alert('Error this category already exist');
             event.target.closest('.category-edit-form').reset();
             return;
         }
 
-        matchingItem.categoryName = categoryName;
-        matchingItem.type = type;
+        if(matchingItem){
+            matchingItem.categoryName = categoryName;
+            matchingItem.type = type;
+        }
+
+        const saveUser = JSON.parse(localStorage.getItem('currentUser'));
+        const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : (window.location.href = 'login.html');
+
+        // Update the value in the transaction and save it to localStorage
+        if(userTransaction){
+            const matchingItem = userTransaction.transaction.find(tran => tran.category === oldCategoryName);
+            matchingItem.category = categoryName;
+            matchingItem.type = type;
+            userTransaction.saveToStorage();
+            userTransaction.renderTransaction();
+        }
+
         this.saveToStorage();
         this.renderCategory();
         this.renderTransactionCategory();
+        this.renderDropdownCategoryTransaction();
     }
 
     deleteCategory(categoryId){
