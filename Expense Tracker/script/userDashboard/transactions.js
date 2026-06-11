@@ -8,6 +8,7 @@ const closeAddTransacModal = document.getElementById('close-add-transaction-moda
 const modal = document.getElementById('add-transaction-modal');
 const saveBtn = document.getElementById('save-transaction');
 const searchFilter = document.getElementById('search');
+const categoryDropdown = document.getElementById('category-dropdown');
 
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
@@ -19,20 +20,27 @@ const tableBody = document.querySelector('.transaction-items-body');
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
 const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : window.location.href = 'login.html';
 
-searchFilter.addEventListener('keyup', () =>{
+searchFilter.addEventListener('keyup', updateFilter);
+categoryDropdown.addEventListener('change', updateFilter);
+
+
+function updateFilter(){
     let searchText = searchFilter.value.toLowerCase();
-    let tableBody = document.querySelector('.transaction-items-body');
+    let selectedCategory = categoryDropdown.value.toLowerCase();
     let tableRow = document.querySelectorAll('.table-items');
 
     tableRow.forEach(tableRowItem =>{
         const description = tableRowItem.cells[1].textContent.toLowerCase();
         const category = tableRowItem.cells[2].textContent.toLowerCase();
 
-        if(description.includes(searchText) || category.includes(searchText)){
+        const matchesText = description.includes(searchText) || category.includes(searchText);
+        const matchesCategory = (selecztedCategory === 'all categories') || (category === selectedCategory)
+
+        if(matchesText && matchesCategory){
             tableRowItem.style.display = '';
         }else { tableRowItem.style.display = 'none'; }
     });
-});
+}
 
 saveBtn.addEventListener('click', (e) =>{
     e.preventDefault();

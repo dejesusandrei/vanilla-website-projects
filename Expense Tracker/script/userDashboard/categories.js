@@ -97,7 +97,3 @@ const editCategToggleModal = () => {
 emptyStateAddCategoryBtn.addEventListener('click', () => addCategToggleModal());
 cancelModal.addEventListener('click', (e) => { e.preventDefault(); e.target.closest('.category-form').reset(); addCategToggleModal();});
 closeAddCategModal.addEventListener('click', (e) => {e.preventDefault(); e.target.closest('.category-form').reset(); addCategToggleModal();});
-
-userCategories.renderCategory();
-userCategories.renderTransactionCategory();
-userCategories.isCategoryEmpty();

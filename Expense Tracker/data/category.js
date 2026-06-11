@@ -8,6 +8,10 @@ export class Category{
         this.#localStorageKey = localStorageKey;
         this.category = undefined;
         this.#loadFromStorage();
+        this.renderCategory();
+        this.isCategoryEmpty();
+        this.renderTransactionCategory();
+        this.renderDropdownCategoryTransaction();
     }
 
     #loadFromStorage(){
@@ -141,6 +145,20 @@ export class Category{
             `;
         });
         categoryTransaction.innerHTML = transactionCategoryHTML;
+    }
+
+    renderDropdownCategoryTransaction(){
+        let transactionCategoryHTML = `<option value="all categories">All Categories</option>`;
+        const categoryDropdown = document.getElementById('category-dropdown');
+        this.category.forEach(categoryItem =>{
+            const { categoryName, type }  = categoryItem;
+            if(!categoryName) return;
+            transactionCategoryHTML +=
+            `
+                <option value="${categoryName}" data-type-category="${type}">${categoryName}</option>
+            `;
+        });
+        categoryDropdown.innerHTML = transactionCategoryHTML;
     }
 
     renderCategory(){

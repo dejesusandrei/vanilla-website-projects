@@ -406,7 +406,8 @@ main{
         margin-top: 2em;
         height: 80px;
         border-radius: 8px;
-        padding: 1em 1.5em;
+        padding: 10px 15px;
+        column-gap: 1em ;
         background-color: white;
         box-shadow:
         0 1px 3px rgba(0, 0, 0, 0.05),
@@ -415,7 +416,7 @@ main{
         .search-bar-container{
             display: flex;
             width: 100%;
-            max-width: 450px;
+            max-width: 350px;
             height: 50px;
             border-radius: 10px;
 
@@ -427,9 +428,9 @@ main{
                 padding: 0 1em;
                 border-top-left-radius: 10px;
                 border-bottom-left-radius: 10px;
-                border-top: 1px solid rgba(0, 0, 0, 0.165);
-                border-bottom: 1px solid rgba(0, 0, 0, 0.165);
-                border-left: 1px solid rgba(0, 0, 0, 0.165);
+                border-top: 1px solid rgba(0, 0, 0, 0.361);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.361);
+                border-left: 1px solid rgba(0, 0, 0, 0.361);
                 button{
                     background-color: transparent;
                     border: none;
@@ -450,15 +451,44 @@ main{
                     border: none;
                     border-top-right-radius: 10px;
                     border-bottom-right-radius: 10px;
-                    border-top: 1px solid rgba(0, 0, 0, 0.165);
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.165);
-                    border-right: 1px solid rgba(0, 0, 0, 0.165);
+                    border-top: 1px solid rgba(0, 0, 0, 0.361);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.361);
+                    border-right: 1px solid rgba(0, 0, 0, 0.361);
                 }
 
                 input:focus{
                     outline: none;
                 }
             }
+        }
+
+        .transaction-category-dropdown{
+            width: 100%;
+            max-width: 150px;
+            height: 50px;
+            border-radius: 10px;
+
+            select{
+                background-color: transparent;
+                padding: 10px 20px;
+                font-family: 'Poppins';
+                font-size: 13px;
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                font-weight: 500;
+                cursor: pointer;
+                outline: none;
+                border: 1px solid rgba(0, 0, 0, 0.361);
+
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+                background-repeat: no-repeat;
+                background-position: right 13px center;
+            }
+
         }
     }
 
@@ -1594,6 +1624,10 @@ main{
     display: flex;
     opacity: 1;
     transform: translateY(0)
+}
+
+.category-dropdown:hover{
+    border-color: #D1D5DB;
 }
 
 .text-green {
