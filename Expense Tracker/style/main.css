@@ -462,7 +462,8 @@ main{
             }
         }
 
-        .transaction-category-dropdown{
+        .transaction-category-dropdown,
+        .transaction-type-dropdown{
             width: 100%;
             max-width: 150px;
             height: 50px;

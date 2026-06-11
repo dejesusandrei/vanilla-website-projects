@@ -14,6 +14,7 @@ export class Category{
         this.isCategoryEmpty();
         this.renderTransactionCategory();
         this.renderDropdownCategoryTransaction();
+        this.renderDropdownTypeTransaction();
     }
 
     #loadFromStorage(){
@@ -58,6 +59,8 @@ export class Category{
         this.isCategoryEmpty();
         this.renderCategory();
         this.renderTransactionCategory();
+        this.renderDropdownCategoryTransaction();
+        this.renderDropdownTypeTransaction();
         event.target.closest('.category-form').reset();
     }
 
@@ -95,6 +98,7 @@ export class Category{
         this.renderCategory();
         this.renderTransactionCategory();
         this.renderDropdownCategoryTransaction();
+        this.renderDropdownTypeTransaction();
     }
 
     deleteCategory(categoryId){
@@ -109,6 +113,8 @@ export class Category{
         this.isCategoryEmpty();
         this.renderCategory();
         this.renderTransactionCategory();
+        this.renderDropdownCategoryTransaction();
+        this.renderDropdownTypeTransaction();
     }
 
     openEditModal(id){
@@ -174,6 +180,18 @@ export class Category{
             `;
         });
         categoryDropdown.innerHTML = transactionCategoryHTML;
+    }
+
+    renderDropdownTypeTransaction(){
+        let transactionTypeHTML = `<option value="all types">All Types</option>`;
+        const typeDropdown = document.getElementById('type-dropdown');
+
+        // Set removes duplicate
+        const uniqueTypes = new Set();
+        this.category.forEach(cat => uniqueTypes.add(cat.type));
+
+        uniqueTypes.forEach(type => transactionTypeHTML +=`<option value="${type}" data-type-category="${type}">${type}</option>`);
+        typeDropdown.innerHTML = transactionTypeHTML;
     }
 
     renderCategory(){

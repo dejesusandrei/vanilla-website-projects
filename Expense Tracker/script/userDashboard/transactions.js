@@ -9,6 +9,7 @@ const modal = document.getElementById('add-transaction-modal');
 const saveBtn = document.getElementById('save-transaction');
 const searchFilter = document.getElementById('search');
 const categoryDropdown = document.getElementById('category-dropdown');
+const typeDropdown = document.getElementById('type-dropdown');
 
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.side-bar');
@@ -22,21 +23,26 @@ const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`)
 
 searchFilter.addEventListener('keyup', updateFilter);
 categoryDropdown.addEventListener('change', updateFilter);
+typeDropdown.addEventListener('change', updateFilter);
 
+console.log(userTransaction.transaction);
 
 function updateFilter(){
     let searchText = searchFilter.value.toLowerCase();
     let selectedCategory = categoryDropdown.value.toLowerCase();
+    let selectedType = typeDropdown.value.toLowerCase();
     let tableRow = document.querySelectorAll('.table-items');
 
     tableRow.forEach(tableRowItem =>{
         const description = tableRowItem.cells[1].textContent.toLowerCase();
         const category = tableRowItem.cells[2].textContent.toLowerCase();
+        const type = tableRowItem.cells[3].textContent.toLowerCase();
 
-        const matchesText = description.includes(searchText) || category.includes(searchText);
-        const matchesCategory = (selectedCategory === 'all categories') || (category === selectedCategory)
+        const matchesText = description.includes(searchText) || category.includes(searchText) || type.includes(searchText);
+        const matchesCategory = (selectedCategory === 'all categories') || (category === selectedCategory);
+        const matchesType = (selectedType === 'all types') || (type === selectedType);
 
-        if(matchesText && matchesCategory){
+        if(matchesText && matchesCategory && matchesType){
             tableRowItem.style.display = '';
         }else { tableRowItem.style.display = 'none'; }
     });
