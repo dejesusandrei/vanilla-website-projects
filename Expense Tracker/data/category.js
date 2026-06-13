@@ -12,13 +12,14 @@ export class Category{
 
     constructor(localStorageKey){
         this.#localStorageKey = localStorageKey;
-        this.category = undefined;
+        this.category = [];
         this.#loadFromStorage();
         this.renderCategory();
         this.isCategoryEmpty();
         this.renderTransactionCategory();
         this.renderDropdownCategoryTransaction();
         this.renderDropdownTypeTransaction();
+        userTransaction.renderTransaction();
     }
 
     #loadFromStorage(){
@@ -110,50 +111,30 @@ export class Category{
 
     deleteCategory(categoryId){
         const targetCategory = this.category.find(cat => Number(cat.id) === categoryId);
-
         if (!targetCategory) {
             console.error("Category not found!");
             return;
         }
+        const targetName = targetCategory.categoryName.trim().toLowerCase();
 
-        const targetName = targetCategory.categoryName.trim();
-        console.log("Target category to delete:", targetName);
-
-        // 1. Alisin muna ang category sa array
         this.category = this.category.filter(cat => cat.id !== categoryId);
+        this.saveToStorage();
+
+        const saveUser = JSON.parse(localStorage.getItem('currentUser'));
+        const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : (window.location.href = 'login.html');
         
         if(userTransaction && targetName){
-            console.log("Transactions BEFORE filter:", userTransaction.transaction.length);
-            
-            const originalCount = userTransaction.transaction.length;
-            
-            // 3. I-filter ang transactions - KEEP ang HINDI tumutugma
             userTransaction.transaction = userTransaction.transaction.filter(tran => {
                 if (!tran.category) return true;  // Keep kung walang category
-                
-                const tranCategory = tran.category.trim().toLowerCase();
-                const targetCategory = targetName.toLowerCase();
-                
-                console.log(`Checking: "${tranCategory}" vs "${targetCategory}" => ${tranCategory !== targetCategory}`);
-                
-                return tranCategory !== targetCategory;  // KEEP kapag HINDI equal
+                return tran.category.trim().toLowerCase() !== targetName;  // KEEP kapag HINDI equal
             });
-            
-            console.log("Transactions AFTER filter:", userTransaction.transaction.length);
-            console.log("Deleted count:", originalCount - userTransaction.transaction.length);
-            
-            // 4. I-save at i-render
             userTransaction.saveToStorage();
-            
-            
+            if (userTransaction.transaction.length === 0) {
                 userTransaction.isTransactionEmpty();
-            
-            
+            }
             userTransaction.renderTransaction();
             userTransaction.renderSummary();
         }
-
-        this.saveToStorage();
         this.isCategoryEmpty();
         this.renderCategory();
         this.renderTransactionCategory();

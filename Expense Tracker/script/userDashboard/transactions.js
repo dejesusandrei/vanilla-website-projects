@@ -19,7 +19,7 @@ const tableBody = document.querySelector('.transaction-items-body');
 // get the current user from localStorage to associate transactions with the user
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
 const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : window.location.href = 'login.html';
-
+console.log(userTransaction.transaction);   
 // Filter
 searchFilter.addEventListener('keyup', updateFilter);
 categoryDropdown.addEventListener('change', updateFilter);
@@ -87,8 +87,6 @@ tableBody.addEventListener('click', (e) =>{
         return;
     }
 });
-
-console.log(userTransaction.transaction);
 
 editModal.addEventListener('click', (e) =>{
     e.preventDefault();
