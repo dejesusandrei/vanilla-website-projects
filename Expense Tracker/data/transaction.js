@@ -126,8 +126,6 @@ export class Transaction{
 
     deleteTransaction(transactionId){
         this.transaction = this.transaction.filter(transac => transac.id !== transactionId);
-        const tableRow = document.querySelector(`.row-${transactionId}`);
-        if(tableRow) tableRow.remove();
         this.saveToStorage();
         this.isTransactionEmpty();
         this.renderTransaction();

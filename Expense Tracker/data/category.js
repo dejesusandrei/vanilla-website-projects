@@ -86,17 +86,18 @@ export class Category{
             matchingItem.categoryName = categoryName;
             matchingItem.type = type;
         }
-
+        
         // Update the value in the transaction and save it to localStorage
         if(userTransaction){
             userTransaction.transaction.forEach(tran =>{
                 if(tran.category === oldCategoryName){
                     tran.category = categoryName;
-                    tran.type = type
+                    tran.type = type;
                 }
             });
             userTransaction.saveToStorage();
             userTransaction.renderTransaction();
+            userTransaction.renderSummary();
         }
 
         this.saveToStorage();
@@ -110,15 +111,44 @@ export class Category{
     deleteCategory(categoryId){
         const targetCategory = this.category.find(cat => Number(cat.id) === categoryId);
 
-        this.category = this.category.filter(cat => cat.id !== categoryId);
-        const tableRow = document.querySelector(`.row-${categoryId}`);
-        if (tableRow) tableRow.remove();
+        if (!targetCategory) {
+            console.error("Category not found!");
+            return;
+        }
 
-        // for automatically deleted transaction based on what category you deleted
-        if(userTransaction && targetCategory){
-            userTransaction.transaction = userTransaction.transaction.filter(tran => tran.category.trim() !== targetCategory.categoryName.trim());
+        const targetName = targetCategory.categoryName.trim();
+        console.log("Target category to delete:", targetName);
+
+        // 1. Alisin muna ang category sa array
+        this.category = this.category.filter(cat => cat.id !== categoryId);
+        
+        if(userTransaction && targetName){
+            console.log("Transactions BEFORE filter:", userTransaction.transaction.length);
+            
+            const originalCount = userTransaction.transaction.length;
+            
+            // 3. I-filter ang transactions - KEEP ang HINDI tumutugma
+            userTransaction.transaction = userTransaction.transaction.filter(tran => {
+                if (!tran.category) return true;  // Keep kung walang category
+                
+                const tranCategory = tran.category.trim().toLowerCase();
+                const targetCategory = targetName.toLowerCase();
+                
+                console.log(`Checking: "${tranCategory}" vs "${targetCategory}" => ${tranCategory !== targetCategory}`);
+                
+                return tranCategory !== targetCategory;  // KEEP kapag HINDI equal
+            });
+            
+            console.log("Transactions AFTER filter:", userTransaction.transaction.length);
+            console.log("Deleted count:", originalCount - userTransaction.transaction.length);
+            
+            // 4. I-save at i-render
             userTransaction.saveToStorage();
-            userTransaction.isTransactionEmpty();
+            
+            
+                userTransaction.isTransactionEmpty();
+            
+            
             userTransaction.renderTransaction();
             userTransaction.renderSummary();
         }

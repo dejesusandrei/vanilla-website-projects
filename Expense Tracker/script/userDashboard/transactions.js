@@ -88,6 +88,8 @@ tableBody.addEventListener('click', (e) =>{
     }
 });
 
+console.log(userTransaction.transaction);
+
 editModal.addEventListener('click', (e) =>{
     e.preventDefault();
     if(e.target.closest('#close-edit-transaction-modal'))  {editTransacToggleModal(); return;}
