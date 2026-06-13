@@ -1,6 +1,7 @@
 import { formatDate } from '../script/utility/date.js';
 import { formatCurrency } from '../script/utility/money.js';
 import { Category } from '../data/category.js';
+import { addedMessage, deletedMessage, editedMessage } from "../script/controls/toastCategories.js";
 
 export class Transaction{
     #localStorageKey;
@@ -91,6 +92,7 @@ export class Transaction{
         this.renderTransaction();
         this.renderSummary();
         event.target.closest('.transaction-form').reset();
+        addedMessage();
     }
 
     editTransaction(transactionId, date, description, category, type, amount, event){
@@ -119,6 +121,7 @@ export class Transaction{
         this.isTransactionEmpty();
         this.renderTransaction();
         this.renderSummary();
+        editedMessage();
     }
 
     deleteTransaction(transactionId){
@@ -129,6 +132,7 @@ export class Transaction{
         this.isTransactionEmpty();
         this.renderTransaction();
         this.renderSummary();
+        deletedMessage();
     }
 
     openEditModal(transactionId){

@@ -1,4 +1,8 @@
 import { Transaction } from "../data/transaction.js";
+import { addedMessage, deletedMessage, editedMessage } from "../script/controls/toastCategories.js";
+
+const saveUser = JSON.parse(localStorage.getItem('currentUser'));
+const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : (window.location.href = 'login.html');
 
 export class Category{
     #localStorageKey;
@@ -62,6 +66,7 @@ export class Category{
         this.renderDropdownCategoryTransaction();
         this.renderDropdownTypeTransaction();
         event.target.closest('.category-form').reset();
+        addedMessage();
     }
 
     editCategory(id, categoryName, type, event){
@@ -82,14 +87,14 @@ export class Category{
             matchingItem.type = type;
         }
 
-        const saveUser = JSON.parse(localStorage.getItem('currentUser'));
-        const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : (window.location.href = 'login.html');
-
         // Update the value in the transaction and save it to localStorage
         if(userTransaction){
-            const matchingItem = userTransaction.transaction.find(tran => tran.category === oldCategoryName);
-            matchingItem.category = categoryName;
-            matchingItem.type = type;
+            userTransaction.transaction.forEach(tran =>{
+                if(tran.category === oldCategoryName){
+                    tran.category = categoryName;
+                    tran.type = type
+                }
+            });
             userTransaction.saveToStorage();
             userTransaction.renderTransaction();
         }
@@ -99,22 +104,32 @@ export class Category{
         this.renderTransactionCategory();
         this.renderDropdownCategoryTransaction();
         this.renderDropdownTypeTransaction();
+        editedMessage();
     }
 
     deleteCategory(categoryId){
-            let newArr = [];
-            this.category.forEach(categoryItem =>{
-                if(categoryItem.id !== Number(categoryId)){
-                    newArr.push(categoryItem);
-                }
-            });
-            this.category = newArr;
+        const targetCategory = this.category.find(cat => Number(cat.id) === categoryId);
+
+        this.category = this.category.filter(cat => cat.id !== categoryId);
+        const tableRow = document.querySelector(`.row-${categoryId}`);
+        if (tableRow) tableRow.remove();
+
+        // for automatically deleted transaction based on what category you deleted
+        if(userTransaction && targetCategory){
+            userTransaction.transaction = userTransaction.transaction.filter(tran => tran.category.trim() !== targetCategory.categoryName.trim());
+            userTransaction.saveToStorage();
+            userTransaction.isTransactionEmpty();
+            userTransaction.renderTransaction();
+            userTransaction.renderSummary();
+        }
+
         this.saveToStorage();
         this.isCategoryEmpty();
         this.renderCategory();
         this.renderTransactionCategory();
         this.renderDropdownCategoryTransaction();
         this.renderDropdownTypeTransaction();
+        deletedMessage();
     }
 
     openEditModal(id){

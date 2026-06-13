@@ -1,5 +1,4 @@
 import { Transaction } from "../../data/transaction.js";
-import { addedMessage, deletedMessage, editedMessage } from "../controls/toastTransaction.js";
 
 const emptyAddTransacBtn = document.getElementById('empty-state-add-transaction');
 const addTransactionBtn = document.querySelector('.add-transaction-btn');
@@ -21,12 +20,10 @@ const tableBody = document.querySelector('.transaction-items-body');
 const saveUser = JSON.parse(localStorage.getItem('currentUser'));
 const userTransaction = saveUser ? new Transaction(`transaction-${saveUser.id}`) : window.location.href = 'login.html';
 
+// Filter
 searchFilter.addEventListener('keyup', updateFilter);
 categoryDropdown.addEventListener('change', updateFilter);
 typeDropdown.addEventListener('change', updateFilter);
-
-console.log(userTransaction.transaction);
-
 function updateFilter(){
     let searchText = searchFilter.value.toLowerCase();
     let selectedCategory = categoryDropdown.value.toLowerCase();
@@ -70,7 +67,6 @@ saveBtn.addEventListener('click', (e) =>{
 
     userTransaction.addTransaction(rawDate, descriptionText, categoryName, categoryType, rawAmount, e);
     addTransacToggleModal();
-    addedMessage();
 });
 
 let currentEditingCategoryId = null;
@@ -79,7 +75,6 @@ tableBody.addEventListener('click', (e) =>{
     if(deleteBtn){
         const transactionId = Number(deleteBtn.getAttribute('data-category-id'));
         userTransaction.deleteTransaction(transactionId);
-        deletedMessage();
         return;
     }
 
@@ -119,7 +114,6 @@ editModal.addEventListener('click', (e) =>{
         }
 
         userTransaction.editTransaction(transactionId, rawDate, descriptionText, categoryName, categoryType, rawAmount, e);
-        editedMessage();
         editTransacToggleModal();
         }
 });
