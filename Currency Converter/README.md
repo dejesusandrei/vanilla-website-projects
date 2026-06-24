@@ -1,0 +1,1 @@
+A live currency converter using Tailwind CSS and an exchange rate API.
