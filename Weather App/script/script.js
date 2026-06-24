@@ -33,6 +33,8 @@ async function getWeather() {
 
         renderWeather(saveObj);
         console.log(data);
+
+        searchInput.value = '';
     }catch(error){
         console.error(`Cannot get the data: ${error}`);
         alert('Cannot find the city. Please try again.');
